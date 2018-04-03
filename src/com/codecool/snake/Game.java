@@ -9,6 +9,10 @@ import javafx.scene.layout.Pane;
 public class Game extends Pane {
 
     public Game() {
+        initGameEntities();
+    }
+
+    private void initGameEntities () {
         new SnakeHead(this, 500, 500);
 
         new SimpleEnemy(this);
@@ -28,6 +32,7 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
                 case RIGHT: Globals.rightKeyDown  = true; break;
+                case R: restart(); break;
             }
         });
 
@@ -39,5 +44,19 @@ public class Game extends Pane {
         });
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
+    }
+
+    public void restart() {
+        resetGame();
+        initGameEntities();
+        start();
+    }
+
+    private void resetGame() {
+        Globals.gameLoop.stop();
+        Globals.newGameObjects.clear();
+        Globals.oldGameObjects.clear();
+        Globals.gameObjects.clear();
+        this.getChildren().clear();
     }
 }
