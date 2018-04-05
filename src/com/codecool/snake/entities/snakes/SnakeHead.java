@@ -8,12 +8,17 @@ import com.codecool.snake.entities.Health;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SpriteCalculator;
 import javafx.geometry.Point2D;
+import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 
 public class SnakeHead extends GameEntity implements Animatable {
@@ -68,16 +73,39 @@ public class SnakeHead extends GameEntity implements Animatable {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
 
+
+
+
             Pane pane = (Pane)Globals.snakeHeadNode.getParent();
+            VBox gameOverVBox = new VBox();
+            gameOverVBox.setAlignment(Pos.CENTER);
+
+            // Game Over text
             Text gameOverText = new Text("Game Over");
             gameOverText.setFont(Font.font ("Verdana", 100));
             gameOverText.setFill(Color.RED);
-            gameOverText.setX((Globals.WINDOW_WIDTH/2)-(gameOverText.getLayoutBounds().getWidth()/2));
-            gameOverText.setY((Globals.WINDOW_HEIGHT/2) - (gameOverText.getLayoutBounds().getHeight()/2));
+            //gameOverText.setX((Globals.WINDOW_WIDTH/2)-(gameOverText.getLayoutBounds().getWidth()/2));
+            //gameOverText.setY((Globals.WINDOW_HEIGHT/2) - (gameOverText.getLayoutBounds().getHeight()/2));
+
+            // Collected money text
+            NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+            String currency = format.format(new Integer(Globals.snakeHeadNode.getHealth()));
+            Text collectedText = new Text("Collected money: " + currency);
+            collectedText.setFont(Font.font ("Verdana", 20));
+            collectedText.setFill(Color.YELLOW);
+
+            gameOverVBox.getChildren().addAll(gameOverText, collectedText);
+            gameOverVBox.setLayoutX((Globals.WINDOW_WIDTH/2)-(gameOverVBox.getBoundsInLocal().getWidth()/2));
+            gameOverVBox.setLayoutY((Globals.WINDOW_HEIGHT/2)-(gameOverVBox.getBoundsInLocal().getHeight()/2));
+
+            // Grey background for game over
             Pane gameOverPane = new Pane();
             gameOverPane.setStyle("-fx-background-color: rgba(100, 100, 100, 0.9);");
             gameOverPane.setMinSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-            pane.getChildren().addAll(gameOverPane, gameOverText);
+
+            //pane.getChildren().addAll(gameOverPane, gameOverText);
+            pane.getChildren().addAll(gameOverPane, gameOverVBox);
+
         }
 
         //Sprite handling
