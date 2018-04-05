@@ -11,12 +11,15 @@ import java.util.Random;
 // a simple powerup that makes the snake grow TODO make other powerups
 public class SimplePowerup extends AbstractPowerUp implements Interactable {
 
-    MovementStatus movementStatus = MovementStatus.STANDSTILL;
+
 
     public SimplePowerup(Pane pane) {
         super(pane);
         setImage(Globals.powerupBerry);
         pane.getChildren().add(this);
+        setDefaultStatus(MovementStatus.STANDSTILL);
+        setMovementStatus(getDefaultStatus());
+
 
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);

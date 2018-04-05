@@ -13,12 +13,13 @@ import java.util.Random;
 // a powerup that makes the enemies stop moving
 public class FreezerPowerUp extends AbstractPowerUp implements Interactable, Animatable {
 
-    MovementStatus movementStatus = MovementStatus.STANDSTILL;
 
     public FreezerPowerUp(Pane pane) {
         super(pane);
         setImage(Globals.powerupSpeeder);
         pane.getChildren().add(this);
+        setDefaultStatus(MovementStatus.STANDSTILL);
+        setMovementStatus(getDefaultStatus());
 
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
@@ -31,7 +32,8 @@ public class FreezerPowerUp extends AbstractPowerUp implements Interactable, Ani
         // make enemies stop moving
         for (GameEntity ge : Globals.getGameObjects()){
             if (ge instanceof SimpleEnemy){ // change to AbstractEnemy
-                System.out.println("freeze this enemy"); // todo
+                // ge.setMovementStatus(MovementStatus.STANDSTILL);
+                // todo
                 // change move to standstill
             }
         }
@@ -42,5 +44,4 @@ public class FreezerPowerUp extends AbstractPowerUp implements Interactable, Ani
     public String getMessage() {
         return "Enemies frozen :)";
     }
-
 }

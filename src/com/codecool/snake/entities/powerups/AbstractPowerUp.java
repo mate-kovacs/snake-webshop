@@ -10,20 +10,21 @@ import javafx.scene.layout.Pane;
 import java.util.Random;
 
 abstract class AbstractPowerUp extends GameEntity {
-    AbstractPowerUp (Pane pane){
-        super(pane);
-    }
-    int stepCount = 0;
+    int stepCount;
     double direction = 0;
-    SnakeHead snakeHead;
-    MovementStatus movementStatus;
-
+    private MovementStatus defaultStatus;
+    private MovementStatus movementStatus;
+    private int stateCounter;
 
     enum MovementStatus {
         STANDSTILL,
         TOWARD_SNAKEHEAD,
         AFAR_SNAKEHEAD,
-        RANDOM_MOVING
+        RANDOM_MOVING,
+    }
+
+    AbstractPowerUp (Pane pane){
+        super(pane);
     }
 
     public void moveRandomly(){
@@ -45,14 +46,19 @@ abstract class AbstractPowerUp extends GameEntity {
     public void moveTowardsSnakeHead (){
         float speed = 4;
         Point2D heading;
-        double directionHead = getAngle(Globals.snakeHeadNode, this);
-        heading = Utils.directionToVector(directionHead, speed);
+        double direction = getAngle(Globals.snakeHeadNode, this);
+        heading = Utils.directionToVector(direction, speed);
         this.setX(getX() + heading.getX());
         this.setY(getY() + heading.getY());
     }
 
     public void moveAfarSnakeHead (){
-        // todo
+        float speed = 4;
+        Point2D heading;
+        double direction = getAngle(Globals.snakeHeadNode, this) + 180; // + 180 degrees for opposite direction
+        heading = Utils.directionToVector(direction, speed);
+        this.setX(getX() + heading.getX());
+        this.setY(getY() + heading.getY());
     }
 
     public double getAngle(SnakeHead snakeHead, GameEntity object){
@@ -63,10 +69,27 @@ abstract class AbstractPowerUp extends GameEntity {
         return Math.toDegrees(Math.atan((d-b)/(c-a)));
     }
 
+    public void setMovementStatus(MovementStatus movementStatus) {
+        this.movementStatus = movementStatus;
+    }
+
+    public MovementStatus getDefaultStatus() {
+        return defaultStatus;
+    }
+
+    public void setDefaultStatus(MovementStatus defaultStatus) {
+        this.defaultStatus = defaultStatus;
+    }
+
+    private void incrementStateCounter() {
+        stateCounter++;
+    }
+
     public void step () {
         if (isOutOfBounds()) {
             destroy();
         }
+        setStatus();
         switch (this.movementStatus){
             case RANDOM_MOVING:
                 this.moveRandomly();
@@ -77,6 +100,17 @@ abstract class AbstractPowerUp extends GameEntity {
             case TOWARD_SNAKEHEAD:
                 this.moveTowardsSnakeHead();
                 break;
+        }
+    }
+
+    protected void setStatus(){
+        if (!this.movementStatus.equals(defaultStatus)) {
+            stateCounter++;
+        }
+
+        if (stateCounter == 100){
+            this.movementStatus = defaultStatus;
+            stateCounter = 0;
         }
     }
 }

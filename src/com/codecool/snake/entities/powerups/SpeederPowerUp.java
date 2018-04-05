@@ -11,12 +11,13 @@ import java.util.Random;
 // a powerup that makes the snake go faster
 public class SpeederPowerUp extends AbstractPowerUp implements Interactable, Animatable {
 
-    private MovementStatus status = AbstractPowerUp.MovementStatus.RANDOM_MOVING;
 
     public SpeederPowerUp(Pane pane) {
         super(pane);
         setImage(Globals.powerupSpeeder);
         pane.getChildren().add(this);
+        setDefaultStatus(MovementStatus.STANDSTILL);
+        setMovementStatus(getDefaultStatus());
 
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
