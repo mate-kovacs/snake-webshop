@@ -13,7 +13,10 @@ import javafx.scene.layout.Pane;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private float speed = 2;
+    private float speed;
+    private float defaultSpeed = 2;
+    private int stepCount;
+    private int statePeriod = 1000;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
@@ -26,6 +29,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(yc);
         health = 100;
         tail = this;
+        speed = defaultSpeed;
         setImage(Globals.snakeHead);
         this.spriteCalculator = new SpriteCalculator(getImage(), 2, 30);
         pane.getChildren().add(this);
@@ -40,6 +44,15 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (Globals.rightKeyDown) {
             dir = dir + turnRate;
         }
+        // set speed
+        if (speed != defaultSpeed){
+            stepCount++;
+        }
+        if (stepCount == statePeriod){
+            speed = defaultSpeed;
+            stepCount = 0;
+        }
+
         // set rotation and position
         setRotate(dir);
         Point2D heading = Utils.directionToVector(dir, speed);
