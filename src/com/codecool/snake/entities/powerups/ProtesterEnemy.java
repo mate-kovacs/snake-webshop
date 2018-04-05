@@ -33,9 +33,12 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
 
     @Override
     public void apply(SnakeHead player) {
+
         if (Globals.bodyParts.empty()){
             System.out.println("Game Over");
             Globals.gameLoop.stop();
+            Globals.snakeHeadNode.gameOver();
+            return;
         }
 
         Globals.bodyParts.pop();

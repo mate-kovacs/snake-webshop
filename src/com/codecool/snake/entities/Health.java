@@ -50,6 +50,10 @@ public class Health extends GameEntity implements Animatable{
         setHealth(Globals.snakeHeadNode.getHealth());
     }
 
+    /**
+     * Sets health and its format.
+     * @param health
+     */
     public void setHealth(int health) {
         for (Node n:root.getChildren()) {
             if (n instanceof Text) {
