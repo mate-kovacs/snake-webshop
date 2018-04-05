@@ -6,6 +6,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.Transition;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -33,7 +34,7 @@ public class Utils {
         text.setFont(Font.font ("Verdana", 20));
         text.setFill(Color.WHITE);
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), text);
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1.1), text);
         fadeTransition.setFromValue(1.0);
         fadeTransition.setToValue(0.0);
         fadeTransition.setCycleCount(Animation.INDEFINITE);
@@ -52,5 +53,12 @@ public class Utils {
             }
         }
         return snakeBodyPartsNr;
+    }
+
+    public static Pane createColoredLayer(String style) {
+        Pane gameOverPane = new Pane();
+        gameOverPane.setStyle(style);
+        gameOverPane.setMinSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+        return gameOverPane;
     }
 }

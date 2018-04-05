@@ -97,12 +97,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         speed = newSpeed;
     }
 
-    private Pane createColoredLayer(String style) {
-        Pane gameOverPane = new Pane();
-        gameOverPane.setStyle(style);
-        gameOverPane.setMinSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-        return gameOverPane;
-    }
+
 
     protected void gameOver() {
         Pane pane = (Pane)Globals.snakeHeadNode.getParent();
@@ -144,7 +139,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // Grey background for game over
         String backgroundStyle = "-fx-background-color: rgba(100, 100, 100, 0.9);";
-        Pane gameOverPane = createColoredLayer(backgroundStyle);
+        Pane gameOverPane = Utils.createColoredLayer(backgroundStyle);
         pane.getChildren().addAll(gameOverPane, gameOverVBox);
     }
 }
