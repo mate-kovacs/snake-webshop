@@ -54,11 +54,4 @@ public class Utils {
         }
         return snakeBodyPartsNr;
     }
-
-    public static Pane createColoredLayer(String style) {
-        Pane gameOverPane = new Pane();
-        gameOverPane.setStyle(style);
-        gameOverPane.setMinSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-        return gameOverPane;
-    }
 }

@@ -33,35 +33,8 @@ public class Main extends Application {
         Game game = new Game();
         Scene gameScene = new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
 
-        //String backgroundStyle = "-fx-background-color: rgba(0, 0, 0, 1);";
-        //Pane gameOverPane = Utils.createColoredLayer(backgroundStyle);
-
-
-        /*Text startTitle = new Text("Da snake game\n");
-        startTitle.setFont(Font.font ("Verdana", 100));
-        startTitle.setFill(Color.RED);*/
-
-        /*ImageView gameOverImage = new ImageView();
-        gameOverImage.setImage(Globals.gameOver);
-        gameOverImage.setFitHeight(200);
-        gameOverImage.setPreserveRatio(true);*/
-
-
-        /*Text startGameText = new Text();
-        String content = "\nPress 'SPACE' to start the game!";
-        Utils.animateBlinkingTextNode(startGameText, content);
-        startGameText.setFont(Font.font ("Verdana", 20));
-        startGameText.setFill(Color.RED);*/
-
-        /*VBox startBox = new VBox();
-        startBox.getChildren().addAll(startTitle, gameOverImage, startGameText);
-        startBox.setAlignment(Pos.CENTER);
-        startBox.setLayoutX((Globals.WINDOW_WIDTH/2)-(startBox.getBoundsInLocal().getWidth()/2));
-        startBox.setLayoutY((Globals.WINDOW_HEIGHT/2)-(startBox.getBoundsInLocal().getHeight()));*/
-
         StartScreen startScreen = new StartScreen();
         startScreen.initStartScreen();
-        //gameOverPane.getChildren().add(startBox);
 
         Scene startScene = new Scene(startScreen, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         startScene.setOnKeyPressed(event -> {
@@ -70,7 +43,6 @@ public class Main extends Application {
                 game.start();
             }
         });
-
 
         primaryStage.setScene(startScene);
         primaryStage.show();

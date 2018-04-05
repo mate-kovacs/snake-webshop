@@ -4,17 +4,11 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
+import com.codecool.snake.screens.GameOverScreen;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SpriteCalculator;
 import javafx.geometry.Point2D;
-import javafx.geometry.Pos;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 
 public class SnakeHead extends GameEntity implements Animatable {
@@ -101,7 +95,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     protected void gameOver() {
         Pane pane = (Pane)Globals.snakeHeadNode.getParent();
-        VBox gameOverVBox = new VBox();
+        /*VBox gameOverVBox = new VBox();
         gameOverVBox.setAlignment(Pos.CENTER);
 
         // Game Over image
@@ -131,15 +125,17 @@ public class SnakeHead extends GameEntity implements Animatable {
         String content = "\nPress 'R' for restart!";
         Text pressRText = new Text();
 
-        Utils.animateBlinkingTextNode(pressRText, content);
+        Utils.animateBlinkingTextNode(pressRText, content);*/
 
-        gameOverVBox.getChildren().addAll(gameOverImage, gameOverText, collectedText, pressRText);
+        /*gameOverVBox.getChildren().addAll(gameOverImage, gameOverText, collectedText, pressRText);
         gameOverVBox.setLayoutX((Globals.WINDOW_WIDTH/2)-(gameOverVBox.getBoundsInLocal().getWidth()/2));
-        gameOverVBox.setLayoutY((Globals.WINDOW_HEIGHT/2)-(gameOverVBox.getBoundsInLocal().getHeight()/2));
+        gameOverVBox.setLayoutY((Globals.WINDOW_HEIGHT/2)-(gameOverVBox.getBoundsInLocal().getHeight()/2));*/
 
         // Grey background for game over
-        String backgroundStyle = "-fx-background-color: rgba(100, 100, 100, 0.9);";
-        Pane gameOverPane = Utils.createColoredLayer(backgroundStyle);
-        pane.getChildren().addAll(gameOverPane, gameOverVBox);
+        /*String backgroundStyle = "-fx-background-color: rgba(100, 100, 100, 0.9);";
+        Pane gameOverPane = Utils.createColoredLayer(backgroundStyle);*/
+        GameOverScreen gameOverScreen = new GameOverScreen();
+        gameOverScreen.initGameOverScreen();
+        pane.getChildren().addAll(gameOverScreen);
     }
 }
