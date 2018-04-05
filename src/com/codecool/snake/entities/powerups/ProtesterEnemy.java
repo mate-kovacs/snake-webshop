@@ -43,7 +43,9 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
 
         Globals.bodyParts.pop();
         Globals.snakeHeadNode.getTail().destroy();
-        Globals.snakeHeadNode.setTail((SnakeBody) Globals.bodyParts.peek());
+        if (!Globals.bodyParts.empty()) {
+            Globals.snakeHeadNode.setTail((SnakeBody) Globals.bodyParts.peek());
+        }
         destroy();
     }
 
