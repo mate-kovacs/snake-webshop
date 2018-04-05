@@ -3,6 +3,7 @@ package com.codecool.snake.entities;
 import com.codecool.snake.Globals;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
@@ -14,18 +15,17 @@ import java.util.Locale;
 
 import java.text.NumberFormat;
 
-public class Health {
-    private ImageView[] stars;
+public class Health implements Animatable{
+
     private HBox root;
-    private int starsNr = 5;
-    private Text dispHealth;
+    private NumberFormat format;
 
     public Health(Pane pane, int health) {
 
-        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+        format = NumberFormat.getCurrencyInstance(Locale.US);
         String currency = format.format(new Integer(health));
 
-        dispHealth = new Text(1, 15, "");
+        Text dispHealth = new Text(1, 15, "");
         dispHealth.setText(currency); //+ Integer.toString(health));
         dispHealth.setFont(Font.font ("Verdana", 20));
         dispHealth.setFill(Color.RED);
@@ -45,4 +45,17 @@ public class Health {
         pane.getChildren().add(root);
     }
 
+    @Override
+    public void step() {
+        //snakeHead.health. setHealth
+    }
+
+    public void setHealth(int health) {
+        for (Node n:root.getChildren()) {
+            if (n instanceof Text) {
+                String currency = format.format(new Integer(health));
+                ((Text) n).setText(currency);
+            }
+        }
+    }
 }
