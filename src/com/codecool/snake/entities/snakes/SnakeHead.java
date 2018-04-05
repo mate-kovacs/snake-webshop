@@ -9,6 +9,7 @@ import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SpriteCalculator;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -106,6 +107,12 @@ public class SnakeHead extends GameEntity implements Animatable {
         VBox gameOverVBox = new VBox();
         gameOverVBox.setAlignment(Pos.CENTER);
 
+        // Game Over image
+        ImageView gameOverImage = new ImageView();
+        gameOverImage.setImage(Globals.gameOver);
+        gameOverImage.setFitHeight(200);
+        gameOverImage.setPreserveRatio(true);
+
         // Game Over text
         Text gameOverText = new Text("Game Over");
         gameOverText.setFont(Font.font ("Verdana", 100));
@@ -118,7 +125,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         collectedText.setFont(Font.font ("Verdana", 20));
         collectedText.setFill(Color.YELLOW);
 
-        gameOverVBox.getChildren().addAll(gameOverText, collectedText);
+        gameOverVBox.getChildren().addAll(gameOverImage, gameOverText, collectedText);
         gameOverVBox.setLayoutX((Globals.WINDOW_WIDTH/2)-(gameOverVBox.getBoundsInLocal().getWidth()/2));
         gameOverVBox.setLayoutY((Globals.WINDOW_HEIGHT/2)-(gameOverVBox.getBoundsInLocal().getHeight()/2));
 
