@@ -4,18 +4,11 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
-import com.codecool.snake.entities.Health;
+import com.codecool.snake.screens.GameOverScreen;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SpriteCalculator;
 import javafx.geometry.Point2D;
-import javafx.geometry.Pos;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 
 public class SnakeHead extends GameEntity implements Animatable {
@@ -106,53 +99,9 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void gameOver() {
         Pane pane = (Pane)Globals.snakeHeadNode.getParent();
-        VBox gameOverVBox = new VBox();
-        gameOverVBox.setAlignment(Pos.CENTER);
-
-        // Game Over image
-        ImageView gameOverImage = new ImageView();
-        gameOverImage.setImage(Globals.gameOver);
-        gameOverImage.setFitHeight(200);
-        gameOverImage.setPreserveRatio(true);
-
-        // Game Over text
-        DropShadow ds = new DropShadow();
-        ds.setOffsetY(3.0);
-        ds.setOffsetX(3.0);
-        ds.setColor(Color.BLACK);
-
-        Text gameOverText = new Text("Game Over");
-        gameOverText.setEffect(ds);
-        gameOverText.setFont(Font.font ("Verdana", 100));
-        gameOverText.setFill(Color.RED);
-
-        // Collected voters text
-        int snakeBodyPartsNr = Utils.getSnakeBodyPartsNr();
-
-        Text collectedText = new Text("Collected voter(s): " + snakeBodyPartsNr);
-        collectedText.setFont(Font.font ("Verdana", 20));
-        collectedText.setFill(Color.YELLOW);
-
-        String content = "\nPress 'R' for restart!";
-        Text pressRText = new Text();
-
-        Utils.animateBlinkingTextNode(pressRText, content);
-
-        gameOverVBox.getChildren().addAll(gameOverImage, gameOverText, collectedText, pressRText);
-        gameOverVBox.setLayoutX((Globals.WINDOW_WIDTH/2)-(gameOverVBox.getBoundsInLocal().getWidth()/2));
-        gameOverVBox.setLayoutY((Globals.WINDOW_HEIGHT/2)-(gameOverVBox.getBoundsInLocal().getHeight()/2));
-
-        // Grey background for game over
-        String backgroundStyle = "-fx-background-color: rgba(100, 100, 100, 0.9);";
-        Pane gameOverPane = createColoredLayer(backgroundStyle);
-        pane.getChildren().addAll(gameOverPane, gameOverVBox);
-    }
-
-    private Pane createColoredLayer(String style) {
-        Pane gameOverPane = new Pane();
-        gameOverPane.setStyle(style);
-        gameOverPane.setMinSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-        return gameOverPane;
+        GameOverScreen gameOverScreen = new GameOverScreen();
+        gameOverScreen.initGameOverScreen();
+        pane.getChildren().addAll(gameOverScreen);
     }
 
 }

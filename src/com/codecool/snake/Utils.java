@@ -3,7 +3,6 @@ package com.codecool.snake;
 import com.codecool.snake.entities.snakes.SnakeBody;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
-import javafx.animation.Transition;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -33,7 +32,7 @@ public class Utils {
         text.setFont(Font.font ("Verdana", 20));
         text.setFill(Color.WHITE);
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), text);
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1.1), text);
         fadeTransition.setFromValue(1.0);
         fadeTransition.setToValue(0.0);
         fadeTransition.setCycleCount(Animation.INDEFINITE);

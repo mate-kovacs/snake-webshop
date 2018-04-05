@@ -2,9 +2,13 @@ package com.codecool.snake;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import com.codecool.snake.screens.StartScreen;
 
 public class Main extends Application {
+
+
 
     public static void main(String[] args) {
         launch(args);
@@ -12,12 +16,25 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Game game = new Game();
 
         primaryStage.setTitle("Snake Game");
-        primaryStage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
+
+        Game game = new Game();
+        Scene gameScene = new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+
+        StartScreen startScreen = new StartScreen();
+        startScreen.initStartScreen();
+
+        Scene startScene = new Scene(startScreen, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+        startScene.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.SPACE)) {
+                primaryStage.setScene(gameScene);
+                game.start();
+            }
+        });
+
+        primaryStage.setScene(startScene);
         primaryStage.show();
-        game.start();
     }
 
 }
