@@ -5,6 +5,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
@@ -12,11 +13,11 @@ import javafx.scene.layout.Pane;
 import java.util.Random;
 
 // a simple enemy TODO make better ones.
-public class DistractorEnemy extends AbstractFieldObject implements Animatable, Interactable {
+public class ProtesterEnemy extends AbstractFieldObject implements Animatable, Interactable {
 
     private static final int damage = 10;
 
-    public DistractorEnemy(Pane pane) {
+    public ProtesterEnemy(Pane pane) {
         super(pane);
 
         setImage(Globals.simpleEnemy);
@@ -26,23 +27,26 @@ public class DistractorEnemy extends AbstractFieldObject implements Animatable, 
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
-        setDefaultStatus(MovementStatus.RANDOM_MOVING);
+        setDefaultStatus(MovementStatus.STANDSTILL);
         setMovementStatus(getDefaultStatus());
     }
 
     @Override
     public void apply(SnakeHead player) {
-        for (GameEntity ge : Globals.getGameObjects()){
-            if (ge instanceof SimpleEnemy){
-                ((SimpleEnemy) ge).setMovementStatus(MovementStatus.AFAR_SNAKEHEAD);
-            }
+        if (Globals.bodyParts.empty()){
+            System.out.println("Game Over");
+            Globals.gameLoop.stop();
         }
+
+        Globals.bodyParts.pop();
+        Globals.snakeHeadNode.getTail().destroy();
+        Globals.snakeHeadNode.setTail((SnakeBody) Globals.bodyParts.peek());
         destroy();
     }
 
     @Override
     public String getMessage() {
-        return "Voters are now moving away from you!";
+        return "Voter stolen!";
     }
 
     @Override

@@ -89,4 +89,12 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void setSpeed(float newSpeed) {
         speed = newSpeed;
     }
+
+    public GameEntity getTail() {
+        return tail;
+    }
+
+    public void setTail(SnakeBody snakeBody){
+        this.tail = snakeBody;
+    }
 }

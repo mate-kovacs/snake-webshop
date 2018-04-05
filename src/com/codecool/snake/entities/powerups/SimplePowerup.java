@@ -17,7 +17,7 @@ public class SimplePowerup extends AbstractFieldObject implements Interactable, 
         super(pane);
         setImage(Globals.powerupBerry);
         pane.getChildren().add(this);
-        setDefaultStatus(MovementStatus.RANDOM_MOVING);
+        setDefaultStatus(MovementStatus.AFAR_SNAKEHEAD);
         setMovementStatus(getDefaultStatus());
 
         Random rnd = new Random();
@@ -39,6 +39,6 @@ public class SimplePowerup extends AbstractFieldObject implements Interactable, 
 
     @Override
     float initSpeed() {
-        return 0.5f;
+        return 2;
     }
 }
