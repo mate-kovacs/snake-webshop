@@ -10,7 +10,10 @@ import com.codecool.snake.entities.SpriteCalculator;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 
 public class SnakeHead extends GameEntity implements Animatable {
@@ -66,10 +69,15 @@ public class SnakeHead extends GameEntity implements Animatable {
             Globals.gameLoop.stop();
 
             Pane pane = (Pane)Globals.snakeHeadNode.getParent();
+            Text gameOverText = new Text("Game Over");
+            gameOverText.setFont(Font.font ("Verdana", 100));
+            gameOverText.setFill(Color.RED);
+            gameOverText.setX((Globals.WINDOW_WIDTH/2)-(gameOverText.getLayoutBounds().getWidth()/2));
+            gameOverText.setY((Globals.WINDOW_HEIGHT/2) - (gameOverText.getLayoutBounds().getHeight()/2));
             Pane gameOverPane = new Pane();
-            gameOverPane.setStyle("-fx-background-color: rgba(0, 100, 100, 0.5);");
+            gameOverPane.setStyle("-fx-background-color: rgba(100, 100, 100, 0.9);");
             gameOverPane.setMinSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-            pane.getChildren().add(gameOverPane);
+            pane.getChildren().addAll(gameOverPane, gameOverText);
         }
 
         //Sprite handling
