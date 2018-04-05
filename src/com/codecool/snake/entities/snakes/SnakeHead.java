@@ -4,7 +4,11 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
+<<<<<<< HEAD
 import com.codecool.snake.screens.GameOverScreen;
+=======
+import com.codecool.snake.entities.Health;
+>>>>>>> 5b5957c518a6a08242810aa07932223ddd2398e5
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SpriteCalculator;
 import javafx.geometry.Point2D;
@@ -30,7 +34,6 @@ public class SnakeHead extends GameEntity implements Animatable {
         this.spriteCalculator = new SpriteCalculator(getImage(), 2, 30);
         pane.getChildren().add(this);
         Globals.snakeHeadNode  = this;
-        addPart(4);
     }
 
     public void step() {
@@ -62,7 +65,6 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
-
             gameOver();
         }
 
@@ -87,14 +89,34 @@ public class SnakeHead extends GameEntity implements Animatable {
         return health;
     }
 
-    public void setSpeed(float newSpeed){
+    public void setSpeed(float newSpeed) {
         speed = newSpeed;
     }
 
+<<<<<<< HEAD
     protected void gameOver() {
+=======
+    public GameEntity getTail() {
+        return tail;
+    }
+
+    public void setTail(SnakeBody snakeBody){
+        this.tail = snakeBody;
+    }
+
+    public void gameOver() {
+>>>>>>> 5b5957c518a6a08242810aa07932223ddd2398e5
         Pane pane = (Pane)Globals.snakeHeadNode.getParent();
         GameOverScreen gameOverScreen = new GameOverScreen();
         gameOverScreen.initGameOverScreen();
         pane.getChildren().addAll(gameOverScreen);
     }
+
+    private Pane createColoredLayer(String style) {
+        Pane gameOverPane = new Pane();
+        gameOverPane.setStyle(style);
+        gameOverPane.setMinSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+        return gameOverPane;
+    }
+
 }

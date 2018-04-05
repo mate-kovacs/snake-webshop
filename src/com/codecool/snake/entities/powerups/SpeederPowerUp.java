@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 import java.util.Random;
 
 // a powerup that makes the snake go faster
-public class SpeederPowerUp extends AbstractPowerUp implements Interactable, Animatable {
+public class SpeederPowerUp extends AbstractFieldObject implements Interactable, Animatable {
 
     public SpeederPowerUp(Pane pane) {
         super(pane);

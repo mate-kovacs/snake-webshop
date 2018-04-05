@@ -4,14 +4,13 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
-import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
 // a powerup that makes the enemies stop moving
-public class FreezerPowerUp extends AbstractPowerUp implements Interactable, Animatable {
+public class FreezerPowerUp extends AbstractFieldObject implements Interactable, Animatable {
 
     public FreezerPowerUp(Pane pane) {
         super(pane);
@@ -31,9 +30,7 @@ public class FreezerPowerUp extends AbstractPowerUp implements Interactable, Ani
         // make enemies stop moving
         for (GameEntity ge : Globals.getGameObjects()){
             if (ge instanceof SimpleEnemy){ // change to AbstractEnemy
-                // ge.setMovementStatus(MovementStatus.STANDSTILL);
-                // todo
-                // change move to standstill
+                 ((SimpleEnemy) ge).setMovementStatus(MovementStatus.STANDSTILL);
             }
         }
         destroy();
