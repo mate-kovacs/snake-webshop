@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.Health;
 import com.codecool.snake.entities.EntitySpawner;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.FreezerPowerUp;
@@ -17,9 +18,10 @@ public class Game extends Pane {
 
     private void initGameEntities () {
         new SnakeHead(this, 500, 500);
+        new Health(this);
 
-//        new EntitySpawner(this, 60, 10, SimpleEnemy.class, 100, 100 );
-//        new EntitySpawner(this, 300, 2, SimplePowerup.class, 100, 100 );
+        new EntitySpawner(this, 60, 10, SimpleEnemy.class, 100, 100 );
+        new EntitySpawner(this, 300, 2, SimplePowerup.class, 100, 100 );
 
         new SimplePowerup(this);
 

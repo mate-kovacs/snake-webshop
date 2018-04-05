@@ -4,10 +4,12 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
+import com.codecool.snake.entities.Health;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SpriteCalculator;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 
@@ -17,7 +19,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
-    private Text dispHealth;
+
     private SpriteCalculator spriteCalculator;
 
     public SnakeHead(Pane pane, int xc, int yc) {
@@ -26,14 +28,10 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(yc);
         health = 100;
         tail = this;
-        dispHealth = new Text(1, 15, "");
-        dispHealth.setText("Health: " + Integer.toString(health));
         setImage(Globals.snakeHead);
         this.spriteCalculator = new SpriteCalculator(getImage(), 2, 30);
         pane.getChildren().add(this);
-        pane.getChildren().add(dispHealth);
         Globals.snakeHeadNode  = this;
-
         addPart(4);
     }
 
@@ -83,7 +81,10 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void changeHealth(int diff) {
         health += diff;
-        dispHealth.setText("Health: " + Integer.toString(health));
+    }
+
+    public int getHealth() {
+        return health;
     }
 
     public void setSpeed(float newSpeed){
