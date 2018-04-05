@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="afcc9528-47bc-4a57-81ca-ee220feb97b2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/src/com/codecool/snake/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codecool/snake/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/codecool/snake/entities/snakes/SnakeHead.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codecool/snake/entities/snakes/SnakeHead.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SnakeHead.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SnakeHead.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/codecool/snake/entities/snakes/SnakeHead.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="135" column="28" selection-start-line="135" selection-start-column="28" selection-end-line="135" selection-end-column="28" />
+            <state relative-caret-position="299">
+              <caret line="140" column="73" lean-forward="true" selection-start-line="140" selection-start-column="73" selection-end-line="140" selection-end-column="73" />
               <folding>
                 <element signature="e#2596#2597#0" expanded="true" />
                 <element signature="e#2626#2627#0" expanded="true" />
@@ -58,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/codecool/snake/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+            <state relative-caret-position="263">
+              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -115,8 +114,8 @@
         <option value="$PROJECT_DIR$/src/com/codecool/snake/Game.java" />
         <option value="$PROJECT_DIR$/src/com/codecool/snake/entities/Health.java" />
         <option value="$PROJECT_DIR$/src/com/codecool/snake/Globals.java" />
-        <option value="$PROJECT_DIR$/src/com/codecool/snake/Utils.java" />
         <option value="$PROJECT_DIR$/src/com/codecool/snake/entities/snakes/SnakeHead.java" />
+        <option value="$PROJECT_DIR$/src/com/codecool/snake/Utils.java" />
       </list>
     </option>
   </component>
@@ -300,12 +299,12 @@
       <workItem from="1522908251563" duration="212000" />
       <workItem from="1522908612419" duration="106000" />
       <workItem from="1522910082731" duration="9670000" />
-      <workItem from="1522926746238" duration="9125000" />
+      <workItem from="1522926746238" duration="9288000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24841000" />
+    <option name="totallyTimeSpent" value="25004000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
@@ -757,16 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/codecool/snake/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/codecool/snake/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -797,11 +786,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/codecool/snake/entities/snakes/SnakeHead.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="135" column="28" selection-start-line="135" selection-start-column="28" selection-end-line="135" selection-end-column="28" />
+        <state relative-caret-position="299">
+          <caret line="140" column="73" lean-forward="true" selection-start-line="140" selection-start-column="73" selection-end-line="140" selection-end-column="73" />
           <folding>
             <element signature="e#2596#2597#0" expanded="true" />
             <element signature="e#2626#2627#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/codecool/snake/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

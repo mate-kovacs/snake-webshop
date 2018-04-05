@@ -136,7 +136,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         String content = "\nPress 'R' for restart!";
         Text pressRText = new Text();
 
-        Utils.animateTypingTextNode(pressRText, content);
+        Utils.animateBlinkingTextNode(pressRText, content);
 
         gameOverVBox.getChildren().addAll(gameOverImage, gameOverText, collectedText, pressRText);
         gameOverVBox.setLayoutX((Globals.WINDOW_WIDTH/2)-(gameOverVBox.getBoundsInLocal().getWidth()/2));

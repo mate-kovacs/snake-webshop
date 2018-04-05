@@ -2,6 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.snakes.SnakeBody;
 import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.animation.Transition;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -27,12 +28,19 @@ public class Utils {
      * @param text
      * @param content
      */
-    public static void animateTypingTextNode(Text text, String content) {
+    public static void animateBlinkingTextNode(Text text, String content) {
         text.setText(content);
         text.setFont(Font.font ("Verdana", 20));
-        text.setFill(Color.DARKMAGENTA);
+        text.setFill(Color.WHITE);
 
-        final Animation animation = new Transition() {
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), text);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.setCycleCount(Animation.INDEFINITE);
+        fadeTransition.play();
+
+
+        /*final Animation animation = new Transition() {
             {
                 setCycleDuration(Duration.millis(2000));
             }
@@ -44,7 +52,7 @@ public class Utils {
             }
         };
 
-        animation.play();
+        animation.play();*/
     }
 
     public static int getSnakeBodyPartsNr() {
