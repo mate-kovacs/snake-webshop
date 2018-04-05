@@ -1,7 +1,6 @@
 package com.codecool.snake.entities;
 
 import com.codecool.snake.Globals;
-import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
@@ -11,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import java.util.Locale;
 
 import java.text.NumberFormat;
@@ -31,7 +29,6 @@ public class Health {
         dispHealth.setText(currency); //+ Integer.toString(health));
         dispHealth.setFont(Font.font ("Verdana", 20));
         dispHealth.setFill(Color.RED);
-        //dispHealth.setTextAlignment(TextAlignment.CENTER);
 
         root = new HBox();
         root.setSpacing(10);
@@ -46,28 +43,6 @@ public class Health {
         root.getChildren().add(image);
         root.getChildren().add(dispHealth);
         pane.getChildren().add(root);
-        /*stars = new ImageView[starsNr];
-
-        for (int i = 0; i < starsNr; i++) {
-            stars[i] = new ImageView();
-        }
-
-        root = new HBox();
-        root.setSpacing(10);
-        root.setPadding(new Insets(15,20,10,10));
-        root.setMaxSize(4,4);
-
-        for (ImageView image: stars) {
-            image.setImage(Globals.star);
-            image.setFitWidth(40);
-            image.setFitHeight(40);
-            root.getChildren().add(image);
-        }
-
-
-        //setX(1);
-        //setY(15);
-        pane.getChildren().add(root);*/
     }
 
 }
