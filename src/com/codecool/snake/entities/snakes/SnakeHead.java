@@ -5,6 +5,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.SpriteCalculator;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -16,6 +17,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     private Text dispHealth;
+    private SpriteCalculator spriteCalculator;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -26,6 +28,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         dispHealth = new Text(1, 15, "");
         dispHealth.setText("Health: " + Integer.toString(health));
         setImage(Globals.snakeHead);
+        this.spriteCalculator = new SpriteCalculator(getImage(), 2, 30);
         pane.getChildren().add(this);
         pane.getChildren().add(dispHealth);
 
@@ -62,6 +65,11 @@ public class SnakeHead extends GameEntity implements Animatable {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
         }
+
+        //Sprite handling
+        spriteCalculator.stepCycle();
+        setViewport(spriteCalculator.getCurrentViewport());
+
     }
 
     public void addPart(int numParts) {
