@@ -24,7 +24,7 @@ public class Utils {
     }
 
     /**
-     * Adds typing animation to Text node
+     * Adds blinking animation to Text the node
      * @param text
      * @param content
      */
@@ -38,21 +38,6 @@ public class Utils {
         fadeTransition.setToValue(0.0);
         fadeTransition.setCycleCount(Animation.INDEFINITE);
         fadeTransition.play();
-
-
-        /*final Animation animation = new Transition() {
-            {
-                setCycleDuration(Duration.millis(2000));
-            }
-
-            protected void interpolate(double frac) {
-                final int length = content.length();
-                final int n = Math.round(length * (float) frac);
-                text.setText(content.substring(0, n));
-            }
-        };
-
-        animation.play();*/
     }
 
     public static int getSnakeBodyPartsNr() {
