@@ -32,6 +32,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         speed = defaultSpeed;
         setImage(Globals.snakeHead);
         this.spriteCalculator = new SpriteCalculator(getImage(), 4, 10);
+        setViewport(spriteCalculator.getCurrentViewport());
         pane.getChildren().add(this);
         Globals.snakeHeadNode  = this;
     }
@@ -74,7 +75,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
-            // gameOver();
+            gameOver();
         }
 
         //Sprite handling
@@ -106,7 +107,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         return tail;
     }
 
-    public void setTail(SnakeBody snakeBody){
+    public void setTail(GameEntity snakeBody){
         this.tail = snakeBody;
     }
 

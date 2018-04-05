@@ -38,6 +38,7 @@ public class SnakeBody extends GameEntity implements Animatable {
         this.parent = parent;
         setImage(Globals.snakeBody);
         this.spriteCalculator = new SpriteCalculator(getImage(), 4, 10);
+        setViewport(spriteCalculator.getCurrentViewport());
         Globals.bodyParts.push(this);
 
         // place it visually below the current tail
