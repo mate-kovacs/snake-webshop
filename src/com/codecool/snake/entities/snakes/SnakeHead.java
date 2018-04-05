@@ -10,9 +10,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
+
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private static final float speed = 2;
+    private float speed = 2;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
@@ -31,6 +32,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         this.spriteCalculator = new SpriteCalculator(getImage(), 2, 30);
         pane.getChildren().add(this);
         pane.getChildren().add(dispHealth);
+        Globals.snakeHeadNode  = this;
 
         addPart(4);
     }
@@ -82,5 +84,9 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void changeHealth(int diff) {
         health += diff;
         dispHealth.setText("Health: " + Integer.toString(health));
+    }
+
+    public void setSpeed(float newSpeed){
+        speed = newSpeed;
     }
 }
