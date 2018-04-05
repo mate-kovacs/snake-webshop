@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.powerups;
 
+import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
@@ -9,9 +10,10 @@ import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
-abstract class AbstractPowerUp extends GameEntity {
+abstract class AbstractPowerUp extends GameEntity implements Animatable {
     int stepCount;
     double direction = 0;
+    protected float speed;
     private MovementStatus defaultStatus;
     private MovementStatus movementStatus;
     private int stateCounter;
@@ -25,10 +27,11 @@ abstract class AbstractPowerUp extends GameEntity {
 
     AbstractPowerUp (Pane pane){
         super(pane);
+        speed = initSpeed();
     }
 
     public void moveRandomly(){
-        float speed = 0;
+        float speed = 2;
         Point2D heading;
         Random rnd = new Random();
         int directionChangeFrequency = 100;
@@ -81,9 +84,7 @@ abstract class AbstractPowerUp extends GameEntity {
         this.defaultStatus = defaultStatus;
     }
 
-    private void incrementStateCounter() {
-        stateCounter++;
-    }
+    abstract float initSpeed();
 
     public void step () {
         if (isOutOfBounds()) {

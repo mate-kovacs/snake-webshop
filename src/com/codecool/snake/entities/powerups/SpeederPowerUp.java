@@ -11,7 +11,6 @@ import java.util.Random;
 // a powerup that makes the snake go faster
 public class SpeederPowerUp extends AbstractPowerUp implements Interactable, Animatable {
 
-
     public SpeederPowerUp(Pane pane) {
         super(pane);
         setImage(Globals.powerupSpeeder);
@@ -36,6 +35,11 @@ public class SpeederPowerUp extends AbstractPowerUp implements Interactable, Ani
     @Override
     public String getMessage() {
         return "Got speeded-up :)";
+    }
+
+    @Override
+    float initSpeed() {
+        return 4;
     }
 
 }

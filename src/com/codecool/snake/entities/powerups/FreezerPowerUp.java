@@ -13,7 +13,6 @@ import java.util.Random;
 // a powerup that makes the enemies stop moving
 public class FreezerPowerUp extends AbstractPowerUp implements Interactable, Animatable {
 
-
     public FreezerPowerUp(Pane pane) {
         super(pane);
         setImage(Globals.powerupSpeeder);
@@ -43,5 +42,10 @@ public class FreezerPowerUp extends AbstractPowerUp implements Interactable, Ani
     @Override
     public String getMessage() {
         return "Enemies frozen :)";
+    }
+
+    @Override
+    float initSpeed() {
+        return 4;
     }
 }

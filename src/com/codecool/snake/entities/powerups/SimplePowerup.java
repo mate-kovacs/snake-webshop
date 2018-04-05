@@ -11,15 +11,12 @@ import java.util.Random;
 // a simple powerup that makes the snake grow TODO make other powerups
 public class SimplePowerup extends AbstractPowerUp implements Interactable {
 
-
-
     public SimplePowerup(Pane pane) {
         super(pane);
         setImage(Globals.powerupBerry);
         pane.getChildren().add(this);
-        setDefaultStatus(MovementStatus.STANDSTILL);
+        setDefaultStatus(MovementStatus.RANDOM_MOVING);
         setMovementStatus(getDefaultStatus());
-
 
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
@@ -35,5 +32,10 @@ public class SimplePowerup extends AbstractPowerUp implements Interactable {
     @Override
     public String getMessage() {
         return "Got simple-power-up :)";
+    }
+
+    @Override
+    float initSpeed() {
+        return 4;
     }
 }
