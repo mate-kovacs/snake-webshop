@@ -4,26 +4,17 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
-import com.codecool.snake.entities.Health;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SpriteCalculator;
-import javafx.animation.Animation;
-import javafx.animation.Transition;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.util.Duration;
-
-import java.text.NumberFormat;
-import java.util.Locale;
 
 
 public class SnakeHead extends GameEntity implements Animatable {
@@ -106,6 +97,13 @@ public class SnakeHead extends GameEntity implements Animatable {
         speed = newSpeed;
     }
 
+    private Pane createColoredLayer(String style) {
+        Pane gameOverPane = new Pane();
+        gameOverPane.setStyle(style);
+        gameOverPane.setMinSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+        return gameOverPane;
+    }
+
     protected void gameOver() {
         Pane pane = (Pane)Globals.snakeHeadNode.getParent();
         VBox gameOverVBox = new VBox();
@@ -118,51 +116,35 @@ public class SnakeHead extends GameEntity implements Animatable {
         gameOverImage.setPreserveRatio(true);
 
         // Game Over text
+        DropShadow ds = new DropShadow();
+        ds.setOffsetY(3.0);
+        ds.setOffsetX(3.0);
+        ds.setColor(Color.BLACK);
+
         Text gameOverText = new Text("Game Over");
+        gameOverText.setEffect(ds);
         gameOverText.setFont(Font.font ("Verdana", 100));
         gameOverText.setFill(Color.RED);
 
         // Collected voters text
-        int snakeBodyPartsNr = 0;
-        for (Node node: Globals.gameObjects) {
-            if (node instanceof SnakeBody) {
-                snakeBodyPartsNr += 1;
-            }
-        }
+        int snakeBodyPartsNr = Utils.getSnakeBodyPartsNr();
 
         Text collectedText = new Text("Collected voter(s): " + snakeBodyPartsNr);
         collectedText.setFont(Font.font ("Verdana", 20));
         collectedText.setFill(Color.YELLOW);
 
-        String content = "Press 'R' for restart!";
-        Text pressRText = new Text(content);
-        pressRText.setFont(Font.font ("Verdana", 20));
-        pressRText.setFill(Color.DARKMAGENTA);
+        String content = "\nPress 'R' for restart!";
+        Text pressRText = new Text();
 
-        final Animation animation = new Transition() {
-            {
-                setCycleDuration(Duration.millis(2000));
-            }
-
-            protected void interpolate(double frac) {
-                final int length = content.length();
-                final int n = Math.round(length * (float) frac);
-                pressRText.setText(content.substring(0, n));
-            }
-
-        };
-
-        animation.play();
+        Utils.animateTypingTextNode(pressRText, content);
 
         gameOverVBox.getChildren().addAll(gameOverImage, gameOverText, collectedText, pressRText);
         gameOverVBox.setLayoutX((Globals.WINDOW_WIDTH/2)-(gameOverVBox.getBoundsInLocal().getWidth()/2));
         gameOverVBox.setLayoutY((Globals.WINDOW_HEIGHT/2)-(gameOverVBox.getBoundsInLocal().getHeight()/2));
 
         // Grey background for game over
-        Pane gameOverPane = new Pane();
-        gameOverPane.setStyle("-fx-background-color: rgba(100, 100, 100, 0.9);");
-        gameOverPane.setMinSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-
+        String backgroundStyle = "-fx-background-color: rgba(100, 100, 100, 0.9);";
+        Pane gameOverPane = createColoredLayer(backgroundStyle);
         pane.getChildren().addAll(gameOverPane, gameOverVBox);
     }
 }
