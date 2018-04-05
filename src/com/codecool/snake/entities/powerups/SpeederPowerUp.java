@@ -1,6 +1,6 @@
 package com.codecool.snake.entities.powerups;
 
-import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
@@ -8,34 +8,38 @@ import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
-// a simple powerup that makes the snake grow TODO make other powerups
-public class SimplePowerup extends AbstractPowerUp implements Interactable {
+// a powerup that makes the snake go faster
+public class SpeederPowerUp extends AbstractPowerUp implements Interactable, Animatable {
 
-    public SimplePowerup(Pane pane) {
+    public SpeederPowerUp(Pane pane) {
         super(pane);
-        setImage(Globals.powerupBerry);
+        setImage(Globals.powerupSpeeder);
         pane.getChildren().add(this);
-        setDefaultStatus(MovementStatus.RANDOM_MOVING);
+        setDefaultStatus(MovementStatus.STANDSTILL);
         setMovementStatus(getDefaultStatus());
 
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+
     }
 
     @Override
     public void apply(SnakeHead snakeHead) {
-        snakeHead.addPart(4);
+        // make snake faster
+        final float fastSpeed = 4.004f;
+        snakeHead.setSpeed(fastSpeed);
         destroy();
     }
 
     @Override
     public String getMessage() {
-        return "Got simple-power-up :)";
+        return "Got speeded-up :)";
     }
 
     @Override
     float initSpeed() {
         return 4;
     }
+
 }
