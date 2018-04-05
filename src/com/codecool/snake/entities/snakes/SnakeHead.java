@@ -9,6 +9,7 @@ import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SpriteCalculator;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -119,9 +120,16 @@ public class SnakeHead extends GameEntity implements Animatable {
         gameOverText.setFill(Color.RED);
 
         // Collected money text
-        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
-        String currency = format.format(new Integer(Globals.snakeHeadNode.getHealth()));
-        Text collectedText = new Text("Collected money: " + currency);
+        //NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+        //String currency = format.format(new Integer(Globals.snakeHeadNode.getHealth()));
+        int snakeBodyPartsNr = 0;
+        for (Node node: Globals.gameObjects) {
+            if (node instanceof SnakeBody) {
+                snakeBodyPartsNr += 1;
+            }
+        }
+
+        Text collectedText = new Text("Collected voter(s): " + snakeBodyPartsNr);
         collectedText.setFont(Font.font ("Verdana", 20));
         collectedText.setFill(Color.YELLOW);
 
