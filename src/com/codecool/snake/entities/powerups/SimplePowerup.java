@@ -28,7 +28,7 @@ public class SimplePowerup extends AbstractFieldObject implements Interactable, 
     @Override
     public void apply(SnakeHead snakeHead) {
         snakeHead.changeHealth(bonusHealth);
-        snakeHead.addPart(4);
+        snakeHead.addPart(1);
         destroy();
     }
 
@@ -39,6 +39,6 @@ public class SimplePowerup extends AbstractFieldObject implements Interactable, 
 
     @Override
     float initSpeed() {
-        return 2;
+        return 1;
     }
 }

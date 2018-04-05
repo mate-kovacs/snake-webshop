@@ -27,7 +27,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         health = 100;
         tail = this;
         setImage(Globals.snakeHead);
-        this.spriteCalculator = new SpriteCalculator(getImage(), 2, 30);
+        this.spriteCalculator = new SpriteCalculator(getImage(), 4, 10);
         pane.getChildren().add(this);
         Globals.snakeHeadNode  = this;
     }
