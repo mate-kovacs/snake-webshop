@@ -17,12 +17,11 @@ public class Game extends Pane {
     }
 
     private void initGameEntities () {
-        SnakeHead snake = new SnakeHead(this, 500, 500);
+        new SnakeHead(this, 500, 500);
+        new Health(this);
 
-        new Health(this, snake.getHealth());
-
-//        new EntitySpawner(this, 60, 10, SimpleEnemy.class, 100, 100 );
-//        new EntitySpawner(this, 300, 2, SimplePowerup.class, 100, 100 );
+        new EntitySpawner(this, 60, 10, SimpleEnemy.class, 100, 100 );
+        new EntitySpawner(this, 300, 2, SimplePowerup.class, 100, 100 );
 
         new SimplePowerup(this);
 

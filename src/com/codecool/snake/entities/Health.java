@@ -15,15 +15,15 @@ import java.util.Locale;
 
 import java.text.NumberFormat;
 
-public class Health implements Animatable{
+public class Health extends GameEntity implements Animatable{
 
     private HBox root;
     private NumberFormat format;
 
-    public Health(Pane pane, int health) {
-
+    public Health(Pane pane) {
+        super(pane);
         format = NumberFormat.getCurrencyInstance(Locale.US);
-        String currency = format.format(new Integer(health));
+        String currency = format.format(new Integer(Globals.snakeHeadNode.getHealth()));
 
         Text dispHealth = new Text(1, 15, "");
         dispHealth.setText(currency); //+ Integer.toString(health));
@@ -47,7 +47,7 @@ public class Health implements Animatable{
 
     @Override
     public void step() {
-        //snakeHead.health. setHealth
+        setHealth(Globals.snakeHeadNode.getHealth());
     }
 
     public void setHealth(int health) {
