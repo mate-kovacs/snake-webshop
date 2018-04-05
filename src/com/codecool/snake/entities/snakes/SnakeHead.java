@@ -7,6 +7,8 @@ import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Health;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SpriteCalculator;
+import javafx.animation.Animation;
+import javafx.animation.Transition;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -18,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -119,9 +122,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         gameOverText.setFont(Font.font ("Verdana", 100));
         gameOverText.setFill(Color.RED);
 
-        // Collected money text
-        //NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
-        //String currency = format.format(new Integer(Globals.snakeHeadNode.getHealth()));
+        // Collected voters text
         int snakeBodyPartsNr = 0;
         for (Node node: Globals.gameObjects) {
             if (node instanceof SnakeBody) {
@@ -133,7 +134,27 @@ public class SnakeHead extends GameEntity implements Animatable {
         collectedText.setFont(Font.font ("Verdana", 20));
         collectedText.setFill(Color.YELLOW);
 
-        gameOverVBox.getChildren().addAll(gameOverImage, gameOverText, collectedText);
+        String content = "Press 'R' for restart!";
+        Text pressRText = new Text(content);
+        pressRText.setFont(Font.font ("Verdana", 20));
+        pressRText.setFill(Color.DARKMAGENTA);
+
+        final Animation animation = new Transition() {
+            {
+                setCycleDuration(Duration.millis(2000));
+            }
+
+            protected void interpolate(double frac) {
+                final int length = content.length();
+                final int n = Math.round(length * (float) frac);
+                pressRText.setText(content.substring(0, n));
+            }
+
+        };
+
+        animation.play();
+
+        gameOverVBox.getChildren().addAll(gameOverImage, gameOverText, collectedText, pressRText);
         gameOverVBox.setLayoutX((Globals.WINDOW_WIDTH/2)-(gameOverVBox.getBoundsInLocal().getWidth()/2));
         gameOverVBox.setLayoutY((Globals.WINDOW_HEIGHT/2)-(gameOverVBox.getBoundsInLocal().getHeight()/2));
 

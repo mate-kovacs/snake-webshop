@@ -47,8 +47,8 @@
       <file leaf-file-name="SnakeHead.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/codecool/snake/entities/snakes/SnakeHead.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="131" column="79" selection-start-line="131" selection-start-column="79" selection-end-line="131" selection-end-column="79" />
+            <state relative-caret-position="479">
+              <caret line="149" column="26" selection-start-line="149" selection-start-column="26" selection-end-line="149" selection-end-column="26" />
               <folding>
                 <element signature="e#2596#2597#0" expanded="true" />
                 <element signature="e#2626#2627#0" expanded="true" />
@@ -327,12 +327,12 @@
       <workItem from="1522908251563" duration="212000" />
       <workItem from="1522908612419" duration="106000" />
       <workItem from="1522910082731" duration="9670000" />
-      <workItem from="1522926746238" duration="5920000" />
+      <workItem from="1522926746238" duration="6497000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21636000" />
+    <option name="totallyTimeSpent" value="22213000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
@@ -810,8 +810,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/codecool/snake/entities/snakes/SnakeHead.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="131" column="79" selection-start-line="131" selection-start-column="79" selection-end-line="131" selection-end-column="79" />
+        <state relative-caret-position="479">
+          <caret line="149" column="26" selection-start-line="149" selection-start-column="26" selection-end-line="149" selection-end-column="26" />
           <folding>
             <element signature="e#2596#2597#0" expanded="true" />
             <element signature="e#2626#2627#0" expanded="true" />
