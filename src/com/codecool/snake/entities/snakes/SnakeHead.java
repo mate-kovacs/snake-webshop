@@ -64,6 +64,12 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
+
+            Pane pane = (Pane)Globals.snakeHeadNode.getParent();
+            Pane gameOverPane = new Pane();
+            gameOverPane.setStyle("-fx-background-color: rgba(0, 100, 100, 0.5);");
+            gameOverPane.setMinSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+            pane.getChildren().add(gameOverPane);
         }
 
         //Sprite handling
