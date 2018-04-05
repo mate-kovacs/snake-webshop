@@ -91,49 +91,8 @@ public class SnakeHead extends GameEntity implements Animatable {
         speed = newSpeed;
     }
 
-
-
     protected void gameOver() {
         Pane pane = (Pane)Globals.snakeHeadNode.getParent();
-        /*VBox gameOverVBox = new VBox();
-        gameOverVBox.setAlignment(Pos.CENTER);
-
-        // Game Over image
-        ImageView gameOverImage = new ImageView();
-        gameOverImage.setImage(Globals.gameOver);
-        gameOverImage.setFitHeight(200);
-        gameOverImage.setPreserveRatio(true);
-
-        // Game Over text
-        DropShadow ds = new DropShadow();
-        ds.setOffsetY(3.0);
-        ds.setOffsetX(3.0);
-        ds.setColor(Color.BLACK);
-
-        Text gameOverText = new Text("Game Over");
-        gameOverText.setEffect(ds);
-        gameOverText.setFont(Font.font ("Verdana", 100));
-        gameOverText.setFill(Color.RED);
-
-        // Collected voters text
-        int snakeBodyPartsNr = Utils.getSnakeBodyPartsNr();
-
-        Text collectedText = new Text("Collected voter(s): " + snakeBodyPartsNr);
-        collectedText.setFont(Font.font ("Verdana", 20));
-        collectedText.setFill(Color.YELLOW);
-
-        String content = "\nPress 'R' for restart!";
-        Text pressRText = new Text();
-
-        Utils.animateBlinkingTextNode(pressRText, content);*/
-
-        /*gameOverVBox.getChildren().addAll(gameOverImage, gameOverText, collectedText, pressRText);
-        gameOverVBox.setLayoutX((Globals.WINDOW_WIDTH/2)-(gameOverVBox.getBoundsInLocal().getWidth()/2));
-        gameOverVBox.setLayoutY((Globals.WINDOW_HEIGHT/2)-(gameOverVBox.getBoundsInLocal().getHeight()/2));*/
-
-        // Grey background for game over
-        /*String backgroundStyle = "-fx-background-color: rgba(100, 100, 100, 0.9);";
-        Pane gameOverPane = Utils.createColoredLayer(backgroundStyle);*/
         GameOverScreen gameOverScreen = new GameOverScreen();
         gameOverScreen.initGameOverScreen();
         pane.getChildren().addAll(gameOverScreen);
