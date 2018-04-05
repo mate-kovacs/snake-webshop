@@ -1,13 +1,11 @@
-package com.codecool.snake.entities.powerups;
+package com.codecool.snake.fieldobjects.powerups;
 
-import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
-import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
-import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
@@ -20,7 +18,6 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
     public ProtesterEnemy(Pane pane) {
         super(pane);
 
-        setImage(Globals.simpleEnemy);
         pane.getChildren().add(this);
 
         Random rnd = new Random();
@@ -33,7 +30,6 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
 
     @Override
     public void apply(SnakeHead player) {
-
         if (Globals.bodyParts.empty()){
             System.out.println("Game Over");
             Globals.gameLoop.stop();
@@ -44,9 +40,13 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
         Globals.bodyParts.pop();
         Globals.snakeHeadNode.getTail().destroy();
         if (!Globals.bodyParts.empty()) {
-            Globals.snakeHeadNode.setTail((SnakeBody) Globals.bodyParts.peek());
+            Globals.snakeHeadNode.setTail((SnakeBody)Globals.bodyParts.peek());
+        } else {
+            Globals.snakeHeadNode.setTail(Globals.snakeHeadNode);
         }
+
         destroy();
+
     }
 
     @Override
@@ -57,5 +57,10 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
     @Override
     float initSpeed() {
         return 2;
+    }
+
+    @Override
+    Image initImage() {
+        return Globals.simpleEnemy;
     }
 }

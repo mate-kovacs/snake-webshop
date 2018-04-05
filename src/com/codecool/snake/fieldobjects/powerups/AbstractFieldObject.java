@@ -1,23 +1,26 @@
-package com.codecool.snake.entities.powerups;
+package com.codecool.snake.fieldobjects.powerups;
 
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
+import com.codecool.snake.entities.SpriteCalculator;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
 abstract class AbstractFieldObject extends GameEntity implements Animatable {
     int stepCount;
-    double direction = 0;
+    double direction;
     protected float speed;
     private MovementStatus defaultStatus;
     private MovementStatus movementStatus;
     private int stateCounter;
     private int statusChangePeriod = 10000;
+    private SpriteCalculator spriteCalculator;
 
     enum MovementStatus {
         STANDSTILL,
@@ -29,6 +32,9 @@ abstract class AbstractFieldObject extends GameEntity implements Animatable {
     AbstractFieldObject(Pane pane) {
         super(pane);
         speed = initSpeed();
+        setImage(initImage());
+        this.spriteCalculator = new SpriteCalculator(getImage(), 4, 10);
+        setViewport(spriteCalculator.getCurrentViewport());
     }
 
     public void moveRandomly() {
@@ -58,7 +64,7 @@ abstract class AbstractFieldObject extends GameEntity implements Animatable {
     }
 
     public void moveAfarSnakeHead() {
-        double direction = getAngle(Globals.snakeHeadNode, this) - 180;
+        double direction = getAngle(Globals.snakeHeadNode, this);
         setRotate(direction);
         Point2D snakeCoordinates = new Point2D(Globals.snakeHeadNode.getX(), Globals.snakeHeadNode.getY());
         Point2D myCoordiantes = new Point2D(this.getX(), this.getY());
@@ -73,7 +79,12 @@ abstract class AbstractFieldObject extends GameEntity implements Animatable {
         double b = object.getY();
         double c = snakeHead.getX();
         double d = snakeHead.getY();
-        return Math.toDegrees(Math.atan((d - b) / (c - a)));
+        double degrees = Math.toDegrees(Math.atan((d - b) / (c - a)));
+        degrees = (degrees < 0) ? degrees-90 : degrees+90;
+        if (d > b) {
+            return degrees-180;
+        }
+        return degrees;
     }
 
     public Point2D getMoveVector(SnakeHead snakeHead, GameEntity ge) {
@@ -96,6 +107,8 @@ abstract class AbstractFieldObject extends GameEntity implements Animatable {
 
     abstract float initSpeed();
 
+    abstract Image initImage();
+
     public void step() {
         if (isOutOfBounds()) {
             destroy();
@@ -112,6 +125,10 @@ abstract class AbstractFieldObject extends GameEntity implements Animatable {
                 this.moveTowardsSnakeHead();
                 break;
         }
+
+        //Sprite handling
+        spriteCalculator.stepCycle();
+        setViewport(spriteCalculator.getCurrentViewport());
     }
 
     protected void setStatus() {
