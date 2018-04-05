@@ -1,10 +1,6 @@
 package com.codecool.snake.entities;
 
 import com.codecool.snake.Globals;
-import com.codecool.snake.entities.Animatable;
-import com.codecool.snake.entities.GameEntity;
-import com.codecool.snake.entities.enemies.SimpleEnemy;
-import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 
 public class EntitySpawner extends GameEntity implements Animatable {

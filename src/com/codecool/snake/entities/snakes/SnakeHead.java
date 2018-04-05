@@ -4,6 +4,7 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
+import com.codecool.snake.entities.Health;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SpriteCalculator;
 import javafx.geometry.Point2D;
@@ -36,7 +37,6 @@ public class SnakeHead extends GameEntity implements Animatable {
         this.spriteCalculator = new SpriteCalculator(getImage(), 2, 30);
         pane.getChildren().add(this);
         Globals.snakeHeadNode  = this;
-        addPart(4);
     }
 
     public void step() {
@@ -68,7 +68,6 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
-
             gameOver();
         }
 
@@ -93,18 +92,19 @@ public class SnakeHead extends GameEntity implements Animatable {
         return health;
     }
 
-    public void setSpeed(float newSpeed){
+    public void setSpeed(float newSpeed) {
         speed = newSpeed;
     }
 
-    private Pane createColoredLayer(String style) {
-        Pane gameOverPane = new Pane();
-        gameOverPane.setStyle(style);
-        gameOverPane.setMinSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-        return gameOverPane;
+    public GameEntity getTail() {
+        return tail;
     }
 
-    protected void gameOver() {
+    public void setTail(SnakeBody snakeBody){
+        this.tail = snakeBody;
+    }
+
+    public void gameOver() {
         Pane pane = (Pane)Globals.snakeHeadNode.getParent();
         VBox gameOverVBox = new VBox();
         gameOverVBox.setAlignment(Pos.CENTER);
@@ -147,4 +147,12 @@ public class SnakeHead extends GameEntity implements Animatable {
         Pane gameOverPane = createColoredLayer(backgroundStyle);
         pane.getChildren().addAll(gameOverPane, gameOverVBox);
     }
+
+    private Pane createColoredLayer(String style) {
+        Pane gameOverPane = new Pane();
+        gameOverPane.setStyle(style);
+        gameOverPane.setMinSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+        return gameOverPane;
+    }
+
 }

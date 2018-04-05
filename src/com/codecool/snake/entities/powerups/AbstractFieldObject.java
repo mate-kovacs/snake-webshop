@@ -10,13 +10,14 @@ import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
-abstract class AbstractPowerUp extends GameEntity implements Animatable {
+abstract class AbstractFieldObject extends GameEntity implements Animatable {
     int stepCount;
     double direction = 0;
     protected float speed;
     private MovementStatus defaultStatus;
     private MovementStatus movementStatus;
     private int stateCounter;
+    private int statusChangePeriod = 10000;
 
     enum MovementStatus {
         STANDSTILL,
@@ -25,13 +26,12 @@ abstract class AbstractPowerUp extends GameEntity implements Animatable {
         RANDOM_MOVING,
     }
 
-    AbstractPowerUp (Pane pane){
+    AbstractFieldObject(Pane pane) {
         super(pane);
         speed = initSpeed();
     }
 
-    public void moveRandomly(){
-        float speed = 2;
+    public void moveRandomly() {
         Point2D heading;
         Random rnd = new Random();
         int directionChangeFrequency = 100;
@@ -46,30 +46,40 @@ abstract class AbstractPowerUp extends GameEntity implements Animatable {
         stepCount++;
     }
 
-    public void moveTowardsSnakeHead (){
-        float speed = 4;
-        Point2D heading;
+    public void moveTowardsSnakeHead() {
         double direction = getAngle(Globals.snakeHeadNode, this);
-        heading = Utils.directionToVector(direction, speed);
-        this.setX(getX() + heading.getX());
-        this.setY(getY() + heading.getY());
+        setRotate(direction);
+        Point2D snakeCoordinates = new Point2D(Globals.snakeHeadNode.getX(), Globals.snakeHeadNode.getY());
+        Point2D myCoordiantes = new Point2D(this.getX(), this.getY());
+        Point2D moveVector = snakeCoordinates.subtract(myCoordiantes);
+        moveVector = moveVector.normalize();
+        this.setX(getX() + moveVector.getX() * speed);
+        this.setY(getY() + moveVector.getY() * speed);
     }
 
-    public void moveAfarSnakeHead (){
-        float speed = 4;
-        Point2D heading;
-        double direction = getAngle(Globals.snakeHeadNode, this) + 180; // + 180 degrees for opposite direction
-        heading = Utils.directionToVector(direction, speed);
-        this.setX(getX() + heading.getX());
-        this.setY(getY() + heading.getY());
+    public void moveAfarSnakeHead() {
+        double direction = getAngle(Globals.snakeHeadNode, this) - 180;
+        setRotate(direction);
+        Point2D snakeCoordinates = new Point2D(Globals.snakeHeadNode.getX(), Globals.snakeHeadNode.getY());
+        Point2D myCoordiantes = new Point2D(this.getX(), this.getY());
+        Point2D moveVector = snakeCoordinates.subtract(myCoordiantes);
+        moveVector = moveVector.normalize().multiply(-1);
+        this.setX(getX() + moveVector.getX() * speed);
+        this.setY(getY() + moveVector.getY() * speed);
     }
 
-    public double getAngle(SnakeHead snakeHead, GameEntity object){
+    public double getAngle(SnakeHead snakeHead, GameEntity object) {
         double a = object.getX();
         double b = object.getY();
-        double c =  snakeHead.getX();
+        double c = snakeHead.getX();
         double d = snakeHead.getY();
-        return Math.toDegrees(Math.atan((d-b)/(c-a)));
+        return Math.toDegrees(Math.atan((d - b) / (c - a)));
+    }
+
+    public Point2D getMoveVector(SnakeHead snakeHead, GameEntity ge) {
+        Point2D moveVector = null;
+        // todo
+        return moveVector;
     }
 
     public void setMovementStatus(MovementStatus movementStatus) {
@@ -86,12 +96,12 @@ abstract class AbstractPowerUp extends GameEntity implements Animatable {
 
     abstract float initSpeed();
 
-    public void step () {
+    public void step() {
         if (isOutOfBounds()) {
             destroy();
         }
         setStatus();
-        switch (this.movementStatus){
+        switch (this.movementStatus) {
             case RANDOM_MOVING:
                 this.moveRandomly();
                 break;
@@ -104,12 +114,12 @@ abstract class AbstractPowerUp extends GameEntity implements Animatable {
         }
     }
 
-    protected void setStatus(){
+    protected void setStatus() {
         if (!this.movementStatus.equals(defaultStatus)) {
             stateCounter++;
         }
 
-        if (stateCounter == 100){
+        if (stateCounter == statusChangePeriod) {
             this.movementStatus = defaultStatus;
             stateCounter = 0;
         }
