@@ -31,7 +31,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setImage(Globals.snakeHead);
         this.spriteCalculator = new SpriteCalculator(getImage(), 2, 30);
         pane.getChildren().add(this);
-        Globals.snakeHeadNode  = this;
+        Globals.snakeHeadNode = this;
         addPart(4);
     }
 
@@ -69,7 +69,6 @@ public class SnakeHead extends GameEntity implements Animatable {
         //Sprite handling
         spriteCalculator.stepCycle();
         setViewport(spriteCalculator.getCurrentViewport());
-
     }
 
     public void addPart(int numParts) {
@@ -87,7 +86,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         return health;
     }
 
-    public void setSpeed(float newSpeed){
+    public void setSpeed(float newSpeed) {
         speed = newSpeed;
     }
 }

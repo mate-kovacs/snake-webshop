@@ -10,13 +10,14 @@ import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
-abstract class AbstractPowerUp extends GameEntity implements Animatable {
+abstract class AbstractFieldObject extends GameEntity implements Animatable {
     int stepCount;
     double direction = 0;
     protected float speed;
     private MovementStatus defaultStatus;
     private MovementStatus movementStatus;
     private int stateCounter;
+    private int statusChangePeriod = 200;
 
     enum MovementStatus {
         STANDSTILL,
@@ -25,13 +26,12 @@ abstract class AbstractPowerUp extends GameEntity implements Animatable {
         RANDOM_MOVING,
     }
 
-    AbstractPowerUp (Pane pane){
+    AbstractFieldObject(Pane pane){
         super(pane);
         speed = initSpeed();
     }
 
     public void moveRandomly(){
-        float speed = 2;
         Point2D heading;
         Random rnd = new Random();
         int directionChangeFrequency = 100;
@@ -47,7 +47,6 @@ abstract class AbstractPowerUp extends GameEntity implements Animatable {
     }
 
     public void moveTowardsSnakeHead (){
-        float speed = 4;
         Point2D heading;
         double direction = getAngle(Globals.snakeHeadNode, this);
         heading = Utils.directionToVector(direction, speed);
@@ -56,9 +55,8 @@ abstract class AbstractPowerUp extends GameEntity implements Animatable {
     }
 
     public void moveAfarSnakeHead (){
-        float speed = 4;
         Point2D heading;
-        double direction = getAngle(Globals.snakeHeadNode, this) + 180; // + 180 degrees for opposite direction
+        double direction = getAngle(Globals.snakeHeadNode, this) + 180; // + 180 degrees to get opposite direction
         heading = Utils.directionToVector(direction, speed);
         this.setX(getX() + heading.getX());
         this.setY(getY() + heading.getY());
@@ -109,7 +107,7 @@ abstract class AbstractPowerUp extends GameEntity implements Animatable {
             stateCounter++;
         }
 
-        if (stateCounter == 100){
+        if (stateCounter == statusChangePeriod){
             this.movementStatus = defaultStatus;
             stateCounter = 0;
         }
