@@ -16,7 +16,7 @@ public class Game extends Pane {
     private void initGameEntities () {
         SnakeHead snake = new SnakeHead(this, 500, 500);
 
-        new Health(this, snake);
+        new Health(this, snake.getHealth());
 
         new SimpleEnemy(this);
         new SimpleEnemy(this);
