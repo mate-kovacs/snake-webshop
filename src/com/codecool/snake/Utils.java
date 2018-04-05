@@ -40,6 +40,10 @@ public class Utils {
         fadeTransition.play();
     }
 
+    /**
+     * Counts snake's bodyparts
+     * @return
+     */
     public static int getSnakeBodyPartsNr() {
         int snakeBodyPartsNr = 0;
         for (Node node: Globals.gameObjects) {
