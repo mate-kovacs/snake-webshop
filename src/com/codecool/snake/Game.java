@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.Health;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
@@ -13,7 +14,9 @@ public class Game extends Pane {
     }
 
     private void initGameEntities () {
-        new SnakeHead(this, 500, 500);
+        SnakeHead snake = new SnakeHead(this, 500, 500);
+
+        new Health(this, snake);
 
         new SimpleEnemy(this);
         new SimpleEnemy(this);
