@@ -1,6 +1,7 @@
 package com.codecool.snake.entities;
 
 import com.codecool.snake.Globals;
+import javafx.geometry.BoundingBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 

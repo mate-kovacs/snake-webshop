@@ -25,10 +25,12 @@ public class GameOverScreen extends Pane {
         gameOverVBox.setAlignment(Pos.CENTER);
 
         // Game Over image
+        /*
         ImageView gameOverImage = new ImageView();
         gameOverImage.setImage(Globals.gameOver);
-        gameOverImage.setFitHeight(200);
+        gameOverImage.setFitHeight(400);
         gameOverImage.setPreserveRatio(true);
+        */
 
         // Game Over text
         DropShadow ds = new DropShadow();
@@ -53,7 +55,7 @@ public class GameOverScreen extends Pane {
 
         Utils.animateBlinkingTextNode(pressRText, content);
 
-        gameOverVBox.getChildren().addAll(gameOverImage, gameOverText, collectedText, pressRText);
+        gameOverVBox.getChildren().addAll(gameOverText, collectedText, pressRText);
         gameOverVBox.setLayoutX((Globals.WINDOW_WIDTH/2)-(gameOverVBox.getBoundsInLocal().getWidth()/2));
         gameOverVBox.setLayoutY((Globals.WINDOW_HEIGHT/2)-(gameOverVBox.getBoundsInLocal().getHeight()/2));
 

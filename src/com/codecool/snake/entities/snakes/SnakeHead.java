@@ -7,6 +7,8 @@ import com.codecool.snake.Utils;
 import com.codecool.snake.screens.GameOverScreen;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SpriteCalculator;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -22,6 +24,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     private int health;
 
     private SpriteCalculator spriteCalculator;
+    private int numOfFrames = 4;
+    public BoundingBox hitBox;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -31,7 +35,9 @@ public class SnakeHead extends GameEntity implements Animatable {
         tail = this;
         speed = defaultSpeed;
         setImage(Globals.snakeHead);
-        this.spriteCalculator = new SpriteCalculator(getImage(), 2, 30);
+        this.spriteCalculator = new SpriteCalculator(getImage(), numOfFrames, 10);
+        setViewport(spriteCalculator.getCurrentViewport());
+        hitBox = new BoundingBox(getX(), getY(), 70, 60);
         pane.getChildren().add(this);
         Globals.snakeHeadNode  = this;
     }
@@ -59,10 +65,13 @@ public class SnakeHead extends GameEntity implements Animatable {
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
 
+        //Update hitbox
+        hitBox = new BoundingBox(getX(), getY(), 70, 60);
+
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {
-            if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
-                if (entity instanceof Interactable) {
+            if (entity instanceof Interactable) {
+                if (hitBox.intersects(((Interactable)entity).getHitbox())) {
                     Interactable interactable = (Interactable) entity;
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
@@ -74,7 +83,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
-            // gameOver();
+            gameOver();
         }
 
         //Sprite handling
@@ -106,7 +115,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         return tail;
     }
 
-    public void setTail(SnakeBody snakeBody){
+    public void setTail(GameEntity snakeBody){
         this.tail = snakeBody;
     }
 
@@ -116,5 +125,4 @@ public class SnakeHead extends GameEntity implements Animatable {
         gameOverScreen.initGameOverScreen();
         pane.getChildren().addAll(gameOverScreen);
     }
-
 }

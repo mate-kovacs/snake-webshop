@@ -1,10 +1,12 @@
-package com.codecool.snake.entities.powerups;
+package com.codecool.snake.fieldobjects.powerups;
 
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import javafx.geometry.BoundingBox;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
@@ -12,16 +14,12 @@ import java.util.Random;
 // a powerup that makes the enemies stop moving
 public class FreezerPowerUp extends AbstractFieldObject implements Interactable, Animatable {
 
-    public FreezerPowerUp(Pane pane) {
-        super(pane);
-        setImage(Globals.powerupSpeeder);
+    public FreezerPowerUp(Pane pane, Double x, Double y) {
+        super(pane, x, y);
+
         pane.getChildren().add(this);
         setDefaultStatus(MovementStatus.STANDSTILL);
         setMovementStatus(getDefaultStatus());
-
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
     }
 
     @Override
@@ -44,5 +42,20 @@ public class FreezerPowerUp extends AbstractFieldObject implements Interactable,
     @Override
     float initSpeed() {
         return 4;
+    }
+
+    @Override
+    Image initImage() {
+        return Globals.powerupSpeeder;
+    }
+
+    @Override
+    public BoundingBox getHitbox() {
+        return new BoundingBox(getX(), getY(), 70, 60);
+    }
+
+    @Override
+    int initNumberOfFrames() {
+        return 0;
     }
 }

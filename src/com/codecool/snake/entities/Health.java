@@ -1,6 +1,7 @@
 package com.codecool.snake.entities;
 
 import com.codecool.snake.Globals;
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;

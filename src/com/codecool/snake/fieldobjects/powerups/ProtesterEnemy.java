@@ -1,13 +1,12 @@
-package com.codecool.snake.entities.powerups;
+package com.codecool.snake.fieldobjects.powerups;
 
-import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
-import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
-import javafx.geometry.Point2D;
+import javafx.geometry.BoundingBox;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
@@ -17,23 +16,16 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
 
     private static final int damage = 10;
 
-    public ProtesterEnemy(Pane pane) {
-        super(pane);
+    public ProtesterEnemy(Pane pane, Double x, Double y) {
+        super(pane, x, y);
 
-        setImage(Globals.simpleEnemy);
         pane.getChildren().add(this);
-
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
-
-        setDefaultStatus(MovementStatus.STANDSTILL);
+        setDefaultStatus(MovementStatus.TOWARD_SNAKEHEAD);
         setMovementStatus(getDefaultStatus());
     }
 
     @Override
     public void apply(SnakeHead player) {
-
         if (Globals.bodyParts.empty()){
             System.out.println("Game Over");
             Globals.gameLoop.stop();
@@ -43,8 +35,14 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
 
         Globals.bodyParts.pop();
         Globals.snakeHeadNode.getTail().destroy();
-        Globals.snakeHeadNode.setTail((SnakeBody) Globals.bodyParts.peek());
+        if (!Globals.bodyParts.empty()) {
+            Globals.snakeHeadNode.setTail((SnakeBody)Globals.bodyParts.peek());
+        } else {
+            Globals.snakeHeadNode.setTail(Globals.snakeHeadNode);
+        }
+
         destroy();
+
     }
 
     @Override
@@ -54,6 +52,21 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
 
     @Override
     float initSpeed() {
-        return 2;
+        return 1;
+    }
+
+    @Override
+    Image initImage() {
+        return Globals.protesterEnemy;
+    }
+
+    @Override
+    public BoundingBox getHitbox() {
+        return new BoundingBox(getX(), getY(), 140, 120);
+    }
+
+    @Override
+    int initNumberOfFrames() {
+        return 4;
     }
 }
