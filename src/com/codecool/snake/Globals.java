@@ -14,8 +14,8 @@ import java.util.Queue;
 // class for holding all static stuff
 public class Globals {
 
-    public static final double WINDOW_WIDTH = 1000;
-    public static final double WINDOW_HEIGHT = 700;
+    public static final double WINDOW_WIDTH = 1920;
+    public static final double WINDOW_HEIGHT = 1080;
 
     public static Image snakeHead = new Image("player.png");
     public static Image snakeBody = new Image("follower.png");
@@ -28,6 +28,7 @@ public class Globals {
 
     public static Image gameStart = new Image("start_image.png");
     public static Image gameOver = new Image("game_over.png");
+    public static Image bgImage = new Image("background.jpg");
 
     //.. put here the other images you want to use
 
