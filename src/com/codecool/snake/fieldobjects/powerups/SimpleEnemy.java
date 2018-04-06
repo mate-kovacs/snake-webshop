@@ -47,4 +47,9 @@ public class SimpleEnemy extends AbstractFieldObject implements Animatable, Inte
     public BoundingBox getHitbox() {
         return new BoundingBox(getX(), getY(), 70, 60);
     }
+
+    @Override
+    int initNumberOfFrames() {
+        return 4;
+    }
 }

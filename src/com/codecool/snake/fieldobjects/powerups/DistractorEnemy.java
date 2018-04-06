@@ -53,4 +53,9 @@ public class DistractorEnemy extends AbstractFieldObject implements Animatable, 
     public BoundingBox getHitbox() {
         return new BoundingBox(getX(), getY(), 70, 60);
     }
+
+    @Override
+    int initNumberOfFrames() {
+        return 0;
+    }
 }

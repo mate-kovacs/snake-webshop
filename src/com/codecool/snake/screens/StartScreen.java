@@ -23,10 +23,10 @@ public class StartScreen extends Pane {
         startTitle.setFont(Font.font ("System", 100));
         startTitle.setFill(Color.RED);
 
-        ImageView gameOverImage = new ImageView();
-        gameOverImage.setImage(Globals.gameOver);
-        gameOverImage.setFitHeight(200);
-        gameOverImage.setPreserveRatio(true);
+        ImageView gameStartImage = new ImageView();
+        gameStartImage.setImage(Globals.gameStart);
+        gameStartImage.setFitHeight(250);
+        gameStartImage.setPreserveRatio(true);
 
         Text startGameText = new Text();
         String content = "\nPress 'SPACE' to start the game!";
@@ -35,7 +35,7 @@ public class StartScreen extends Pane {
         startGameText.setFill(Color.RED);
 
         VBox startBox = new VBox();
-        startBox.getChildren().addAll(startTitle, gameOverImage, startGameText);
+        startBox.getChildren().addAll(startTitle, gameStartImage, startGameText);
         startBox.setAlignment(Pos.CENTER);
         startBox.setLayoutX((Globals.WINDOW_WIDTH/2)-(startBox.getBoundsInLocal().getWidth()/2));
         startBox.setLayoutY((Globals.WINDOW_HEIGHT/2)-(startBox.getBoundsInLocal().getHeight()));

@@ -24,7 +24,9 @@ public class Globals {
 
     public static Image simplePowerUp = new Image("follower.png");
     public static Image coins = new Image("coins.png");
-    public static Image powerupSpeeder = new Image("speeder_power_up.png");
+    public static Image powerupSpeeder = new Image("drug.png");
+
+    public static Image gameStart = new Image("start_image.png");
     public static Image gameOver = new Image("game_over.png");
 
     //.. put here the other images you want to use

@@ -46,6 +46,11 @@ public class SpeederPowerUp extends AbstractFieldObject implements Interactable,
 
     @Override
     public BoundingBox getHitbox() {
-        return new BoundingBox(getX(), getY(), 70, 60);
+        return new BoundingBox(getX(), getY(), 50, 60);
+    }
+
+    @Override
+    int initNumberOfFrames() {
+        return 1;
     }
 }

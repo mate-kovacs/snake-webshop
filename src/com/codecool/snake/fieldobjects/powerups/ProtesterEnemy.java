@@ -52,7 +52,7 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
 
     @Override
     float initSpeed() {
-        return 0.8f;
+        return 1;
     }
 
     @Override
@@ -63,5 +63,10 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
     @Override
     public BoundingBox getHitbox() {
         return new BoundingBox(getX(), getY(), 140, 120);
+    }
+
+    @Override
+    int initNumberOfFrames() {
+        return 4;
     }
 }

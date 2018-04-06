@@ -13,8 +13,6 @@ import java.util.Random;
 // a simple powerup that makes the snake grow TODO make other powerups
 public class SimplePowerup extends AbstractFieldObject implements Interactable, Animatable {
 
-    final int bonusHealth = 10;
-
     public SimplePowerup(Pane pane, Double x, Double y) {
         super(pane, x, y);
 
@@ -29,7 +27,6 @@ public class SimplePowerup extends AbstractFieldObject implements Interactable, 
 
     @Override
     public void apply(SnakeHead snakeHead) {
-        snakeHead.changeHealth(bonusHealth);
         snakeHead.addPart(1);
         destroy();
     }
@@ -52,5 +49,10 @@ public class SimplePowerup extends AbstractFieldObject implements Interactable, 
     @Override
     public BoundingBox getHitbox() {
         return new BoundingBox(getX(), getY(), 70, 60);
+    }
+
+    @Override
+    int initNumberOfFrames() {
+        return 4;
     }
 }

@@ -22,7 +22,7 @@ abstract class AbstractFieldObject extends GameEntity implements Animatable {
     private int stateCounter;
     private int statusChangePeriod = 10000;
     private SpriteCalculator spriteCalculator;
-    private int numOfFrames = 4;
+    private int numOfFrames;
 
     enum MovementStatus {
         STANDSTILL,
@@ -34,6 +34,7 @@ abstract class AbstractFieldObject extends GameEntity implements Animatable {
     AbstractFieldObject(Pane pane) {
         super(pane);
         speed = initSpeed();
+        numOfFrames = initNumberOfFrames();
         setImage(initImage());
         this.spriteCalculator = new SpriteCalculator(getImage(), numOfFrames, 10);
         setViewport(spriteCalculator.getCurrentViewport());
@@ -117,6 +118,8 @@ abstract class AbstractFieldObject extends GameEntity implements Animatable {
     abstract float initSpeed();
 
     abstract Image initImage();
+
+    abstract  int initNumberOfFrames();
 
     public void step() {
         if (isOutOfBounds()) {
