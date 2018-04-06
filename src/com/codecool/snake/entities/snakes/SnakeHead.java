@@ -4,16 +4,28 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
+import com.codecool.snake.screens.GameOverScreen;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.SpriteCalculator;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
+
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private static final float speed = 2;
+    private float speed;
+    private float defaultSpeed = 2;
+    private int stepCount;
+    private int statePeriod = 1000;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
+
+    private SpriteCalculator spriteCalculator;
+    private int numOfFrames = 4;
+    public BoundingBox hitBox;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -21,10 +33,13 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(yc);
         health = 100;
         tail = this;
+        speed = defaultSpeed;
         setImage(Globals.snakeHead);
+        this.spriteCalculator = new SpriteCalculator(getImage(), numOfFrames, 10);
+        setViewport(spriteCalculator.getCurrentViewport());
+        hitBox = new BoundingBox(getX(), getY(), 70, 60);
         pane.getChildren().add(this);
-
-        addPart(4);
+        Globals.snakeHeadNode  = this;
     }
 
     public void step() {
@@ -35,16 +50,28 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (Globals.rightKeyDown) {
             dir = dir + turnRate;
         }
+        // set speed
+        if (speed != defaultSpeed){
+            stepCount++;
+        }
+        if (stepCount == statePeriod){
+            speed = defaultSpeed;
+            stepCount = 0;
+        }
+
         // set rotation and position
         setRotate(dir);
         Point2D heading = Utils.directionToVector(dir, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
 
+        //Update hitbox
+        hitBox = new BoundingBox(getX(), getY(), 70, 60);
+
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {
-            if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
-                if (entity instanceof Interactable) {
+            if (entity instanceof Interactable) {
+                if (hitBox.intersects(((Interactable)entity).getHitbox())) {
                     Interactable interactable = (Interactable) entity;
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
@@ -56,7 +83,13 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
+            gameOver();
         }
+
+        //Sprite handling
+        spriteCalculator.stepCycle();
+        setViewport(spriteCalculator.getCurrentViewport());
+
     }
 
     public void addPart(int numParts) {
@@ -68,5 +101,28 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void changeHealth(int diff) {
         health += diff;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setSpeed(float newSpeed) {
+        speed = newSpeed;
+    }
+
+    public GameEntity getTail() {
+        return tail;
+    }
+
+    public void setTail(GameEntity snakeBody){
+        this.tail = snakeBody;
+    }
+
+    public void gameOver() {
+        Pane pane = (Pane)Globals.snakeHeadNode.getParent();
+        GameOverScreen gameOverScreen = new GameOverScreen();
+        gameOverScreen.initGameOverScreen();
+        pane.getChildren().addAll(gameOverScreen);
     }
 }
