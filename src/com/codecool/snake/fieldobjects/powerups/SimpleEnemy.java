@@ -4,6 +4,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
@@ -13,15 +14,10 @@ public class SimpleEnemy extends AbstractFieldObject implements Animatable, Inte
 
     private static final int damage = 10;
 
-    public SimpleEnemy(Pane pane) {
-        super(pane);
+    public SimpleEnemy(Pane pane, Double x, Double y) {
+        super(pane, x, y);
 
         pane.getChildren().add(this);
-
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
-
         setDefaultStatus(MovementStatus.RANDOM_MOVING);
         setMovementStatus(getDefaultStatus());
     }
@@ -45,5 +41,10 @@ public class SimpleEnemy extends AbstractFieldObject implements Animatable, Inte
     @Override
     Image initImage() {
         return Globals.simpleEnemy;
+    }
+
+    @Override
+    public BoundingBox getHitbox() {
+        return new BoundingBox(getX(), getY(), 70, 60);
     }
 }

@@ -4,6 +4,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
@@ -14,10 +15,11 @@ public class SimplePowerup extends AbstractFieldObject implements Interactable, 
 
     final int bonusHealth = 10;
 
-    public SimplePowerup(Pane pane) {
-        super(pane);
+    public SimplePowerup(Pane pane, Double x, Double y) {
+        super(pane, x, y);
+
         pane.getChildren().add(this);
-        setDefaultStatus(MovementStatus.AFAR_SNAKEHEAD);
+        setDefaultStatus(MovementStatus.RANDOM_MOVING);
         setMovementStatus(getDefaultStatus());
 
         Random rnd = new Random();
@@ -45,5 +47,10 @@ public class SimplePowerup extends AbstractFieldObject implements Interactable, 
     @Override
     Image initImage() {
         return Globals.simplePowerUp;
+    }
+
+    @Override
+    public BoundingBox getHitbox() {
+        return new BoundingBox(getX(), getY(), 70, 60);
     }
 }

@@ -2,7 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.Health;
 import com.codecool.snake.entities.EntitySpawner;
-import com.codecool.snake.entities.powerups.*;
+import com.codecool.snake.fieldobjects.powerups.*;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -17,10 +17,10 @@ public class Game extends Pane {
         new SnakeHead(this, 500, 500);
         new Health(this);
 
-        //new EntitySpawner(this, 100, 5, SimpleEnemy.class, 100, 100 );
+        new EntitySpawner(this, 200, 5, SimpleEnemy.class, 100, 100 );
         //new EntitySpawner(this, 100, 5, DistractorEnemy.class, 100, 100 );
-        new EntitySpawner(this, 30, 1, ProtesterEnemy.class, 100, 100 );
-        new EntitySpawner(this, 30, 10, SimplePowerup.class, 100, 100 );
+        new EntitySpawner(this, 300, 1, ProtesterEnemy.class, 100, 100 );
+        new EntitySpawner(this, 30, 4, SimplePowerup.class, 100, 100 );
         //new EntitySpawner(this, 30, 2, FreezerPowerUp.class, 100, 100 );
         //new EntitySpawner(this, 30, 2, SpeederPowerUp.class, 100, 100 );
     }

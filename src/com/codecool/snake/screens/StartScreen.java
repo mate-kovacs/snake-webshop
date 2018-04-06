@@ -19,8 +19,8 @@ public class StartScreen extends Pane {
     }
 
     public void initStartScreen() {
-        Text startTitle = new Text("Da snake game\n");
-        startTitle.setFont(Font.font ("Verdana", 100));
+        Text startTitle = new Text("Election Run\n");
+        startTitle.setFont(Font.font ("System", 100));
         startTitle.setFill(Color.RED);
 
         ImageView gameOverImage = new ImageView();

@@ -6,6 +6,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.SpriteCalculator;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -21,6 +22,7 @@ abstract class AbstractFieldObject extends GameEntity implements Animatable {
     private int stateCounter;
     private int statusChangePeriod = 10000;
     private SpriteCalculator spriteCalculator;
+    private int numOfFrames = 4;
 
     enum MovementStatus {
         STANDSTILL,
@@ -33,8 +35,15 @@ abstract class AbstractFieldObject extends GameEntity implements Animatable {
         super(pane);
         speed = initSpeed();
         setImage(initImage());
-        this.spriteCalculator = new SpriteCalculator(getImage(), 4, 10);
+        this.spriteCalculator = new SpriteCalculator(getImage(), numOfFrames, 10);
         setViewport(spriteCalculator.getCurrentViewport());
+    }
+
+    AbstractFieldObject(Pane pane, Double x, Double y) {
+        this(pane);
+        setX(x);
+        setY(y);
+
     }
 
     public void moveRandomly() {
@@ -54,7 +63,7 @@ abstract class AbstractFieldObject extends GameEntity implements Animatable {
 
     public void moveTowardsSnakeHead() {
         double direction = getAngle(Globals.snakeHeadNode, this);
-        setRotate(direction);
+        setRotate(direction+180);
         Point2D snakeCoordinates = new Point2D(Globals.snakeHeadNode.getX(), Globals.snakeHeadNode.getY());
         Point2D myCoordiantes = new Point2D(this.getX(), this.getY());
         Point2D moveVector = snakeCoordinates.subtract(myCoordiantes);

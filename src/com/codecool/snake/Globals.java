@@ -19,8 +19,10 @@ public class Globals {
 
     public static Image snakeHead = new Image("player.png");
     public static Image snakeBody = new Image("follower.png");
-    public static Image simpleEnemy = new Image("simple_enemy.png");
-    public static Image powerupBerry = new Image("powerup_berry.png");
+    public static Image simpleEnemy = new Image("nav.png");
+    public static Image protesterEnemy = new Image("protester.png");
+
+    public static Image simplePowerUp = new Image("follower.png");
     public static Image coins = new Image("coins.png");
     public static Image powerupSpeeder = new Image("speeder_power_up.png");
     public static Image gameOver = new Image("game_over.png");

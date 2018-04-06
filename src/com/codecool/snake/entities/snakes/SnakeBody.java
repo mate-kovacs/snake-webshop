@@ -5,6 +5,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.SpriteCalculator;
 import com.sun.javafx.geom.Vec2d;
+import javafx.geometry.BoundingBox;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 

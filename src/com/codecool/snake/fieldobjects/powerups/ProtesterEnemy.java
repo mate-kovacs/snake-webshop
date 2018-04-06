@@ -5,6 +5,7 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
@@ -15,16 +16,11 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
 
     private static final int damage = 10;
 
-    public ProtesterEnemy(Pane pane) {
-        super(pane);
+    public ProtesterEnemy(Pane pane, Double x, Double y) {
+        super(pane, x, y);
 
         pane.getChildren().add(this);
-
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
-
-        setDefaultStatus(MovementStatus.STANDSTILL);
+        setDefaultStatus(MovementStatus.TOWARD_SNAKEHEAD);
         setMovementStatus(getDefaultStatus());
     }
 
@@ -56,11 +52,16 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
 
     @Override
     float initSpeed() {
-        return 2;
+        return 0.8f;
     }
 
     @Override
     Image initImage() {
-        return Globals.simpleEnemy;
+        return Globals.protesterEnemy;
+    }
+
+    @Override
+    public BoundingBox getHitbox() {
+        return new BoundingBox(getX(), getY(), 140, 120);
     }
 }
