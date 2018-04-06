@@ -52,7 +52,7 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
 
     @Override
     float initSpeed() {
-        return 1;
+        return 2;
     }
 
     @Override
