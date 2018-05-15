@@ -29,16 +29,16 @@ public class ProtesterEnemy extends AbstractFieldObject implements Animatable, I
         if (Globals.bodyParts.empty()){
             System.out.println("Game Over");
             Globals.gameLoop.stop();
-            // Globals.snakeHeadNode.gameOver();
+            Globals.snakeHeadNode.gameOver();
             return;
-        }
-
-        Globals.bodyParts.pop();
-        Globals.snakeHeadNode.getTail().destroy();
-        if (!Globals.bodyParts.empty()) {
-            Globals.snakeHeadNode.setTail((SnakeBody)Globals.bodyParts.peek());
         } else {
-            Globals.snakeHeadNode.setTail(Globals.snakeHeadNode);
+            Globals.bodyParts.pop();
+            Globals.snakeHeadNode.getTail().destroy();
+            if (!Globals.bodyParts.empty()) {
+                Globals.snakeHeadNode.setTail((SnakeBody) Globals.bodyParts.peek());
+            } else {
+                Globals.snakeHeadNode.setTail(Globals.snakeHeadNode);
+            }
         }
 
         destroy();
