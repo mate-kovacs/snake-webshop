@@ -3,7 +3,6 @@ package com.lordofstrings.netconnector;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -60,13 +59,13 @@ public class HttpRequester {
             System.out.println("Error receiving data");
         }
 
-        Map<String, Integer> map = parseJsonToMap(serverResponse);
+        String jsonString = serverResponse.toString();
 
-        return map;
+        return parseJsonToMap(jsonString);
     }
 
-    private Map<String, Integer> parseJsonToMap(StringBuilder serverResponse) {
-        JsonElement element = new JsonParser().parse(serverResponse.toString());
+    private Map<String, Integer> parseJsonToMap(String serverResponse) {
+        JsonElement element = new JsonParser().parse(serverResponse);
         JsonObject object = element.getAsJsonObject();
         int numberOfItems = object.get("numberOfItems").getAsInt();
         int totalPrice = object.get("priceSum").getAsInt();
