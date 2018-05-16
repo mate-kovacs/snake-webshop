@@ -11,6 +11,10 @@ import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 public class SnakeHead extends GameEntity implements Animatable {
@@ -124,5 +128,14 @@ public class SnakeHead extends GameEntity implements Animatable {
         GameOverScreen gameOverScreen = new GameOverScreen();
         gameOverScreen.initGameOverScreen();
         pane.getChildren().addAll(gameOverScreen);
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(new URI("http://localhost:8080/snake-shopping-cart"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
