@@ -1,6 +1,9 @@
 package com.lordofstrings.netconnector;
 
-import org.json.JSONObject;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -9,6 +12,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HttpRequester {
     private HttpURLConnection connection = null;
@@ -26,7 +31,7 @@ public class HttpRequester {
         }
     }
 
-    public String sendPostRequest(String parameters) {
+    public Map<String, Integer> sendPostRequest(String parameters) {
         try {
             composePostRequestHeader(parameters);
 
@@ -35,7 +40,6 @@ public class HttpRequester {
             connectionDataOutputStream.flush();
 
             int responseCode = connection.getResponseCode();
-
             System.out.println("\nSending 'POST' request to URL : " + connection.getURL());
             System.out.println("Post content type : " + connection.getRequestProperty("Content-Type"));
             System.out.println("Post parameters : " + parameters);
@@ -55,8 +59,21 @@ public class HttpRequester {
         } catch (IOException e) {
             System.out.println("Error receiving data");
         }
-        System.out.println(serverResponse.toString());
-        return serverResponse.toString();
+
+        Map<String, Integer> map = parseJsonToMap(serverResponse);
+
+        return map;
+    }
+
+    private Map<String, Integer> parseJsonToMap(StringBuilder serverResponse) {
+        JsonElement element = new JsonParser().parse(serverResponse.toString());
+        JsonObject object = element.getAsJsonObject();
+        int numberOfItems = object.get("numberOfItems").getAsInt();
+        int totalPrice = object.get("priceSum").getAsInt();
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("itemsNum", numberOfItems);
+        map.put("totalPrice", totalPrice);
+        return map;
     }
 
     private void composePostRequestHeader(String urlParameters) {
@@ -76,6 +93,6 @@ public class HttpRequester {
     //For testing
     public static void main(String[] args) {
         HttpRequester productAdder = new HttpRequester("http://localhost:8080/");
-        productAdder.sendPostRequest("id=2");
+        productAdder.sendPostRequest("id=30");
     }
 }
