@@ -5,19 +5,15 @@ import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
-import java.util.Queue;
+import java.util.*;
 
 // class for holding all static stuff
 public class Globals {
 
     public static final double WINDOW_WIDTH = 1920;
     public static final double WINDOW_HEIGHT = 1080;
-
-    public static final String SHOP_ADDRESS = "http://localhost:8080/";
+    public static Map<Integer, Integer> productList = null;
+    public static String shoppingCartId = null;
 
     public static Image snakeHead = new Image("player.png");
     public static Image snakeBody = new Image("card.png");

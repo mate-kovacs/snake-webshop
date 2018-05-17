@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.lordofstrings.netconnector.GameRequests;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -24,7 +25,8 @@ public class Main extends Application {
 
         StartScreen startScreen = new StartScreen();
         startScreen.initStartScreen();
-
+        GameRequests gameRequest = GameRequests.getInstance();
+        gameRequest.getProducts();
         Scene startScene = new Scene(startScreen, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         startScene.setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.SPACE)) {

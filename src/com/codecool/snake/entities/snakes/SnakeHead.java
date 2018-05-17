@@ -10,7 +10,8 @@ import com.codecool.snake.entities.SpriteCalculator;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
-import java.awt.Desktop;
+
+import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -41,7 +42,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setViewport(spriteCalculator.getCurrentViewport());
         hitBox = new BoundingBox(getX(), getY(), 70, 60);
         pane.getChildren().add(this);
-        Globals.snakeHeadNode  = this;
+        Globals.snakeHeadNode = this;
     }
 
     public void step() {
@@ -53,10 +54,10 @@ public class SnakeHead extends GameEntity implements Animatable {
             dir = dir + turnRate;
         }
         // set speed
-        if (speed != defaultSpeed){
+        if (speed != defaultSpeed) {
             stepCount++;
         }
-        if (stepCount == statePeriod){
+        if (stepCount == statePeriod) {
             speed = defaultSpeed;
             stepCount = 0;
         }
@@ -73,7 +74,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {
             if (entity instanceof Interactable) {
-                if (hitBox.intersects(((Interactable)entity).getHitbox())) {
+                if (hitBox.intersects(((Interactable) entity).getHitbox())) {
                     Interactable interactable = (Interactable) entity;
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
@@ -117,23 +118,23 @@ public class SnakeHead extends GameEntity implements Animatable {
         return tail;
     }
 
-    public void setTail(GameEntity snakeBody){
+    public void setTail(GameEntity snakeBody) {
         this.tail = snakeBody;
     }
 
     public void gameOver() {
-        Pane pane = (Pane)Globals.snakeHeadNode.getParent();
+        Pane pane = (Pane) Globals.snakeHeadNode.getParent();
         GameOverScreen gameOverScreen = new GameOverScreen();
         gameOverScreen.initGameOverScreen();
         pane.getChildren().addAll(gameOverScreen);
         if (Desktop.isDesktopSupported()) {
-            try {
-                Desktop.getDesktop().browse(new URI("http://localhost:8080/snake-shopping-cart"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
+            new Thread(() -> {
+                try {
+                    Desktop.getDesktop().browse( new URI( "http://localhost:8080/snake-shopping-cart?shoppingcart_id=" + Globals.shoppingCartId ) );
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }).start();
         }
     }
 }
