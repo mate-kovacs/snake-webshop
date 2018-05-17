@@ -21,7 +21,7 @@ public class JsonParserProEdition {
         return map;
     }
 
-    private Map<Integer, Integer> parseJsonToMapProducts(String serverResponse) {
+    public Map<Integer, Integer> parseJsonToMapProducts(String serverResponse) {
         JsonElement element = new JsonParser().parse(serverResponse);
         JsonObject object = element.getAsJsonObject();
 
