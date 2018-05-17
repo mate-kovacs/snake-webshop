@@ -45,6 +45,6 @@ public class TormentorEnemy extends AbstractFieldObject implements Animatable, I
 
     @Override
     public BoundingBox getHitbox() {
-        return new BoundingBox(getX(), getY(), 70, 152);
+        return new BoundingBox(getX(), getY(), 70, 90);
     }
 }
