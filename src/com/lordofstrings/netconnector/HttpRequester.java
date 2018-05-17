@@ -1,8 +1,7 @@
 package com.lordofstrings.netconnector;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.codecool.snake.utils.JsonParserProEdition;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -11,7 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 
 public class HttpRequester {
@@ -61,18 +59,7 @@ public class HttpRequester {
 
         String jsonString = serverResponse.toString();
 
-        return parseJsonToMap(jsonString);
-    }
-
-    private Map<String, Integer> parseJsonToMap(String serverResponse) {
-        JsonElement element = new JsonParser().parse(serverResponse);
-        JsonObject object = element.getAsJsonObject();
-        int numberOfItems = object.get("numberOfItems").getAsInt();
-        int totalPrice = object.get("priceSum").getAsInt();
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        map.put("itemsNum", numberOfItems);
-        map.put("totalPrice", totalPrice);
-        return map;
+        return JsonParserProEdition.parseJsonToMap(jsonString);
     }
 
     private void composePostRequestHeader(String urlParameters) {
