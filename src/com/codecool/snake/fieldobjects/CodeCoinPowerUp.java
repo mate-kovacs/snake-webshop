@@ -14,7 +14,7 @@ public class CodeCoinPowerUp extends AbstractFieldObject implements Interactable
 
     static Random random = new Random();
 
-    private static final int BONUS_COIN_CEIL = 2;
+    private static final int BONUS_COIN_CEIL = 5;
 
     public CodeCoinPowerUp(Pane pane, Double x, Double y) {
         super(pane, x, y);
