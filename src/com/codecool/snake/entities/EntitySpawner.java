@@ -1,12 +1,17 @@
 package com.codecool.snake.entities;
 
 import com.codecool.snake.Globals;
+import com.codecool.snake.entities.interfaces.Animatable;
 import javafx.geometry.BoundingBox;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
 public class EntitySpawner extends GameEntity implements Animatable {
+    static final double SPAWN_AREA_WIDTH = Globals.WINDOW_WIDTH - 100;
+    static final double SPAWN_AREA_HEIGHT = Globals.WINDOW_HEIGHT- 100;
+    static final double OFFSET_LEFT = SPAWN_AREA_WIDTH / 2;
+    static final double OFFSET_TOP = SPAWN_AREA_WIDTH / 2;
     private int posX;
     private int posY;
     private int frequency;
@@ -38,8 +43,8 @@ public class EntitySpawner extends GameEntity implements Animatable {
             BoundingBox hitBox;
             do {
                 Random rnd = new Random();
-                xCoord = rnd.nextDouble() * Globals.WINDOW_WIDTH;
-                yCoord = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
+                xCoord = rnd.nextDouble() * SPAWN_AREA_WIDTH + OFFSET_LEFT;
+                yCoord = rnd.nextDouble() * SPAWN_AREA_HEIGHT + OFFSET_TOP;
                 hitBox = new BoundingBox(xCoord, yCoord, hitBoxWidth, hitBoxHeight);
             } while (hitBox.intersects(Globals.snakeHeadNode.hitBox));
             try {

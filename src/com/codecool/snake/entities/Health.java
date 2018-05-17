@@ -1,7 +1,7 @@
 package com.codecool.snake.entities;
 
 import com.codecool.snake.Globals;
-import javafx.geometry.BoundingBox;
+import com.codecool.snake.entities.interfaces.Animatable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -16,7 +16,7 @@ import java.util.Locale;
 
 import java.text.NumberFormat;
 
-public class Health extends GameEntity implements Animatable{
+public class Health extends GameEntity implements Animatable {
 
     private HBox root;
     private NumberFormat format;
@@ -24,11 +24,11 @@ public class Health extends GameEntity implements Animatable{
     public Health(Pane pane) {
         super(pane);
         format = NumberFormat.getCurrencyInstance(Locale.US);
-        String currency = format.format(new Integer(Globals.snakeHeadNode.getHealth()));
+        String currency = format.format(new Integer(Globals.snakeHeadNode.getMoney()));
 
         Text dispHealth = new Text(1, 15, "");
         dispHealth.setText(currency); //+ Integer.toString(health));
-        dispHealth.setFont(Font.font ("Verdana", 20));
+        dispHealth.setFont(Font.font ("Verdana", 30));
         dispHealth.setFill(Color.RED);
 
         root = new HBox();
@@ -38,8 +38,8 @@ public class Health extends GameEntity implements Animatable{
         root.setAlignment(Pos.CENTER);
         ImageView image = new ImageView();
         image.setImage(Globals.coins);
-        image.setFitWidth(40);
-        image.setFitHeight(40);
+        image.setFitWidth(80);
+        image.setFitHeight(80);
 
         root.getChildren().add(image);
         root.getChildren().add(dispHealth);
@@ -48,7 +48,7 @@ public class Health extends GameEntity implements Animatable{
 
     @Override
     public void step() {
-        setHealth(Globals.snakeHeadNode.getHealth());
+        setHealth(Globals.snakeHeadNode.getMoney());
     }
 
     /**
