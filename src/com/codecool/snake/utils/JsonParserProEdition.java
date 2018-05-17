@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class JsonParserProEdition {
 
-    public static Map<String, Integer> parseJsonToMap(String serverResponse) {
+    public static Map<String, Integer> parseJsonToMapTotalPriceAndNum(String serverResponse) {
         JsonElement element = new com.google.gson.JsonParser().parse(serverResponse);
         JsonObject object = element.getAsJsonObject();
         int numberOfItems = object.get("numberOfItems").getAsInt();
