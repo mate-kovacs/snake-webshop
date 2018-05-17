@@ -18,7 +18,7 @@ public class QuestItem extends AbstractFieldObject implements Interactable, Anim
     private static List<Integer> productList = new ArrayList();
 
     private int productId;
-    private int price;
+    private int price = 10;
 
     public QuestItem(Pane pane, Double x, Double y) {
         super(pane, x, y);
@@ -34,8 +34,11 @@ public class QuestItem extends AbstractFieldObject implements Interactable, Anim
 
     @Override
     public void apply(SnakeHead snakeHead) {
-        snakeHead.addPart(1);
-        destroy();
+        if (snakeHead.getMoney() >= this.price) {
+            snakeHead.changeMoney(-price);
+            snakeHead.addPart(1);
+            destroy();
+        }
     }
 
     @Override

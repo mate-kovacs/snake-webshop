@@ -24,7 +24,7 @@ public class Globals {
     public static Image tormentorEnemy = new Image("tormentor.png");
 
     public static Image questItem = new Image("card.png");
-    public static Image coins = new Image("coins.png");
+    public static Image coins = new Image("codecoin.png");
     public static Image powerupSpeeder = new Image("drug.png");
     public static Image powerupCoin = new Image("codecoin.png");
 
