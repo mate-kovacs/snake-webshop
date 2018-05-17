@@ -43,8 +43,8 @@ public class EntitySpawner extends GameEntity implements Animatable {
             BoundingBox hitBox;
             do {
                 Random rnd = new Random();
-                xCoord = rnd.nextDouble() * SPAWN_AREA_WIDTH + OFFSET_LEFT;
-                yCoord = rnd.nextDouble() * SPAWN_AREA_HEIGHT + OFFSET_TOP;
+                xCoord = rnd.nextDouble() * Globals.WINDOW_WIDTH; //SPAWN_AREA_WIDTH + OFFSET_LEFT;
+                yCoord = rnd.nextDouble() * Globals.WINDOW_HEIGHT; //SPAWN_AREA_HEIGHT + OFFSET_TOP;
                 hitBox = new BoundingBox(xCoord, yCoord, hitBoxWidth, hitBoxHeight);
             } while (hitBox.intersects(Globals.snakeHeadNode.hitBox));
             try {

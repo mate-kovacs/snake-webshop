@@ -47,7 +47,7 @@ public class CodeCoinPowerUp extends AbstractFieldObject implements Interactable
 
     @Override
     public String getMessage() {
-        return null;
+        return "Got coin";
     }
 
     @Override
