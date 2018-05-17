@@ -59,7 +59,7 @@ public class HttpRequester {
 
         String jsonString = serverResponse.toString();
 
-        return JsonParserProEdition.parseJsonToMap(jsonString);
+        return JsonParserProEdition.parseJsonToMapTotalPriceAndNum(jsonString);
     }
 
     private void composePostRequestHeader(String urlParameters) {
