@@ -22,7 +22,7 @@ public class SimpleEnemy extends AbstractFieldObject implements Animatable, Inte
 
     @Override
     public void apply(SnakeHead player) {
-        player.changeHealth(-damage);
+        player.changeMoney(-damage);
         destroy();
     }
 
