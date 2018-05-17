@@ -7,11 +7,14 @@ import com.codecool.snake.fieldobjects.QuestItem;
 import com.codecool.snake.fieldobjects.SpeederPowerUp;
 import com.codecool.snake.fieldobjects.TormentorEnemy;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import com.lordofstrings.netconnector.GameRequests;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class Game extends Pane {
+
+    static GameRequests gameRequests = GameRequests.getInstance();
 
     public Game() {
         initGameEntities();
@@ -36,6 +39,7 @@ public class Game extends Pane {
     }
 
     public void start() {
+        gameRequests.getShoppingCartId();
         Scene scene = getScene();
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
