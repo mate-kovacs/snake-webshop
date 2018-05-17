@@ -18,13 +18,15 @@ public class Globals {
     public static final double WINDOW_HEIGHT = 1080;
 
     public static Image snakeHead = new Image("player.png");
-    public static Image snakeBody = new Image("follower.png");
+    public static Image snakeBody = new Image("card.png");
     public static Image simpleEnemy = new Image("nav.png");
     public static Image protesterEnemy = new Image("protester.png");
+    public static Image tormentorEnemy = new Image("tormentor.png");
 
-    public static Image simplePowerUp = new Image("follower.png");
+    public static Image questItem = new Image("card.png");
     public static Image coins = new Image("coins.png");
     public static Image powerupSpeeder = new Image("drug.png");
+    public static Image powerupCoin = new Image("codecoin.png");
 
     public static Image gameStart = new Image("start_image.png");
     public static Image gameOver = new Image("game_over.png");

@@ -1,12 +1,11 @@
-package com.codecool.snake.fieldobjects.powerups;
+package com.codecool.snake.fieldobjects;
 
-import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.entities.interfaces.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.SpriteCalculator;
 import com.codecool.snake.entities.snakes.SnakeHead;
-import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
