@@ -28,7 +28,7 @@ public class HttpRequester {
         }
     }
 
-    public Map<String, Integer> sendPostRequest(String parameters) {
+    public String sendPostRequest(String parameters) {
         try {
             composePostRequestHeader(parameters);
 
@@ -57,9 +57,8 @@ public class HttpRequester {
             System.out.println("Error receiving data");
         }
 
-        String jsonString = serverResponse.toString();
-
-        return JsonParserProEdition.parseJsonToMap(jsonString);
+        return serverResponse.toString();
+        
     }
 
     private void composePostRequestHeader(String urlParameters) {
