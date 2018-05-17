@@ -8,8 +8,13 @@ import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
+import java.util.Random;
+
 public class CodeCoinPowerUp extends AbstractFieldObject implements Interactable, Animatable {
-    private static final int BONUS_COIN = 1;
+
+    static Random random = new Random();
+
+    private static final int BONUS_COIN_CEIL = 2;
 
     public CodeCoinPowerUp(Pane pane, Double x, Double y) {
         super(pane, x, y);
@@ -36,7 +41,7 @@ public class CodeCoinPowerUp extends AbstractFieldObject implements Interactable
 
     @Override
     public void apply(SnakeHead player) {
-        player.changeHealth(BONUS_COIN);
+        player.changeMoney(random.nextInt(BONUS_COIN_CEIL)+1);
         destroy();
     }
 
