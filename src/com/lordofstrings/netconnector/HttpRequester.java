@@ -1,5 +1,6 @@
 package com.lordofstrings.netconnector;
 
+import com.codecool.snake.Globals;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -16,14 +17,20 @@ import java.util.Map;
 
 public class HttpRequester {
     private HttpURLConnection connection = null;
+    private URL URL_ADDRESS = null;
 
     public HttpRequester(String url) {
         try {
-            URL UrlObj = new URL(url);
-            connection = (HttpURLConnection) UrlObj.openConnection();
+            URL_ADDRESS = new URL(url);
         } catch (MalformedURLException e) {
             System.out.println("Wrong URL string");
             e.printStackTrace();
+        }
+    }
+
+    private void connectServer() {
+        try {
+            connection = (HttpURLConnection) URL_ADDRESS.openConnection();
         } catch (IOException e) {
             System.out.println("Cannot connect URL");
             e.printStackTrace();
@@ -31,6 +38,7 @@ public class HttpRequester {
     }
 
     public Map<String, Integer> sendPostRequest(String parameters) {
+        connectServer();
         try {
             composePostRequestHeader(parameters);
 
@@ -60,7 +68,7 @@ public class HttpRequester {
         }
 
         String jsonString = serverResponse.toString();
-
+        connection.disconnect();
         return parseJsonToMap(jsonString);
     }
 
@@ -91,7 +99,7 @@ public class HttpRequester {
 
     //For testing
     public static void main(String[] args) {
-        HttpRequester productAdder = new HttpRequester("http://localhost:8080/");
+        HttpRequester productAdder = new HttpRequester(Globals.SHOP_ADDRESS);
         productAdder.sendPostRequest("id=30");
     }
 }

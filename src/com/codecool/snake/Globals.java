@@ -17,6 +17,8 @@ public class Globals {
     public static final double WINDOW_WIDTH = 1920;
     public static final double WINDOW_HEIGHT = 1080;
 
+    public static final String SHOP_ADDRESS = "http://localhost:8080/";
+
     public static Image snakeHead = new Image("player.png");
     public static Image snakeBody = new Image("card.png");
     public static Image simpleEnemy = new Image("nav.png");

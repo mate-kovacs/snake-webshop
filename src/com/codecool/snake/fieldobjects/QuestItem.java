@@ -4,6 +4,8 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.interfaces.Animatable;
 import com.codecool.snake.entities.interfaces.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import com.lordofstrings.netconnector.HttpRequester;
+import com.lordofstrings.netconnector.QuestItemRequester;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -13,12 +15,12 @@ import java.util.List;
 import java.util.Random;
 
 // a simple powerup that makes the snake grow TODO make other powerups
-public class QuestItem extends AbstractFieldObject implements Interactable, Animatable {
+public class QuestItem extends AbstractFieldObject implements Interactable, Animatable, QuestItemRequester {
 
     private static List<Integer> productList = new ArrayList();
 
-    private int productId;
-    private int price = 10;
+    private int productId = 1;
+    private int price = 1;
 
     public QuestItem(Pane pane, Double x, Double y) {
         super(pane, x, y);
@@ -35,6 +37,7 @@ public class QuestItem extends AbstractFieldObject implements Interactable, Anim
     @Override
     public void apply(SnakeHead snakeHead) {
         if (snakeHead.getMoney() >= this.price) {
+            addItem(productId);
             snakeHead.changeMoney(-price);
             snakeHead.addPart(1);
             destroy();
@@ -43,7 +46,7 @@ public class QuestItem extends AbstractFieldObject implements Interactable, Anim
 
     @Override
     public String getMessage() {
-        return "Got new quest item :)";
+        return "Quest item touching";
     }
 
     @Override
