@@ -1,7 +1,9 @@
 package com.lordofstrings.netconnector;
 
-import com.codecool.snake.utils.JsonParserProEdition;
-
+import com.codecool.snake.Globals;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -10,18 +12,25 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 public class HttpRequester {
     private HttpURLConnection connection = null;
+    private URL URL_ADDRESS = null;
 
     public HttpRequester(String url) {
         try {
-            URL UrlObj = new URL(url);
-            connection = (HttpURLConnection) UrlObj.openConnection();
+            URL_ADDRESS = new URL(url);
         } catch (MalformedURLException e) {
             System.out.println("Wrong URL string");
             e.printStackTrace();
+        }
+    }
+
+    private void connectServer() {
+        try {
+            connection = (HttpURLConnection) URL_ADDRESS.openConnection();
         } catch (IOException e) {
             System.out.println("Cannot connect URL");
             e.printStackTrace();
@@ -29,6 +38,7 @@ public class HttpRequester {
     }
 
     public String sendPostRequest(String parameters) {
+        connectServer();
         try {
             composePostRequestHeader(parameters);
 
@@ -57,6 +67,7 @@ public class HttpRequester {
             System.out.println("Error receiving data");
         }
 
+        connection.disconnect();
         return serverResponse.toString();
 
     }
@@ -77,7 +88,7 @@ public class HttpRequester {
 
     //For testing
     public static void main(String[] args) {
-        HttpRequester productAdder = new HttpRequester("http://localhost:8080/");
+        HttpRequester productAdder = new HttpRequester(Globals.SHOP_ADDRESS);
         productAdder.sendPostRequest("id=30");
     }
 }

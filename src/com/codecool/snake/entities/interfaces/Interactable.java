@@ -1,4 +1,4 @@
-package com.codecool.snake.entities;
+package com.codecool.snake.entities.interfaces;
 
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.BoundingBox;

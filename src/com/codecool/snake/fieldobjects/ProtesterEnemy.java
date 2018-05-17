@@ -1,15 +1,13 @@
-package com.codecool.snake.fieldobjects.powerups;
+package com.codecool.snake.fieldobjects;
 
 import com.codecool.snake.Globals;
-import com.codecool.snake.entities.Animatable;
-import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.interfaces.Animatable;
+import com.codecool.snake.entities.interfaces.Interactable;
 import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-
-import java.util.Random;
 
 // a simple enemy TODO make better ones.
 public class ProtesterEnemy extends AbstractFieldObject implements Animatable, Interactable {

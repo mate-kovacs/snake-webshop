@@ -2,10 +2,9 @@ package com.codecool.snake.entities.snakes;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
-import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.entities.interfaces.Animatable;
 import com.codecool.snake.entities.SpriteCalculator;
 import com.sun.javafx.geom.Vec2d;
-import javafx.geometry.BoundingBox;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
@@ -38,7 +37,7 @@ public class SnakeBody extends GameEntity implements Animatable {
         super(pane);
         this.parent = parent;
         setImage(Globals.snakeBody);
-        this.spriteCalculator = new SpriteCalculator(getImage(), 4, 10);
+        this.spriteCalculator = new SpriteCalculator(getImage(), 1, 200);
         setViewport(spriteCalculator.getCurrentViewport());
         Globals.bodyParts.push(this);
 
