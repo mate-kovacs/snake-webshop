@@ -37,7 +37,7 @@ public class HttpRequester {
         }
     }
 
-    public Map<String, Integer> sendPostRequest(String parameters) {
+    public String sendPostRequest(String parameters) {
         connectServer();
         try {
             composePostRequestHeader(parameters);
@@ -67,20 +67,9 @@ public class HttpRequester {
             System.out.println("Error receiving data");
         }
 
-        String jsonString = serverResponse.toString();
         connection.disconnect();
-        return parseJsonToMap(jsonString);
-    }
+        return serverResponse.toString();
 
-    private Map<String, Integer> parseJsonToMap(String serverResponse) {
-        JsonElement element = new JsonParser().parse(serverResponse);
-        JsonObject object = element.getAsJsonObject();
-        int numberOfItems = object.get("numberOfItems").getAsInt();
-        int totalPrice = object.get("priceSum").getAsInt();
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        map.put("itemsNum", numberOfItems);
-        map.put("totalPrice", totalPrice);
-        return map;
     }
 
     private void composePostRequestHeader(String urlParameters) {
