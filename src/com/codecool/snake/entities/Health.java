@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import java.util.Locale;
 
@@ -19,16 +20,14 @@ import java.text.NumberFormat;
 public class Health extends GameEntity implements Animatable {
 
     private HBox root;
-    private NumberFormat format;
 
     public Health(Pane pane) {
         super(pane);
-        format = NumberFormat.getCurrencyInstance(Locale.US);
-        String currency = format.format(new Integer(Globals.snakeHeadNode.getMoney()));
+        String money = Integer.toString(Globals.snakeHeadNode.getMoney());
 
         Text dispHealth = new Text(1, 15, "");
-        dispHealth.setText(currency); //+ Integer.toString(health));
-        dispHealth.setFont(Font.font ("Verdana", 30));
+        dispHealth.setText(money); //+ Integer.toString(health));
+        dispHealth.setFont(Font.font ("Verdana",FontWeight.BOLD, 30));
         dispHealth.setFill(Color.RED);
 
         root = new HBox();
@@ -58,7 +57,7 @@ public class Health extends GameEntity implements Animatable {
     public void setHealth(int health) {
         for (Node n:root.getChildren()) {
             if (n instanceof Text) {
-                String currency = format.format(new Integer(health));
+                String currency = Integer.toString(health);
                 ((Text) n).setText(currency);
             }
         }
