@@ -127,14 +127,16 @@ public class SnakeHead extends GameEntity implements Animatable {
         GameOverScreen gameOverScreen = new GameOverScreen();
         gameOverScreen.initGameOverScreen();
         pane.getChildren().addAll(gameOverScreen);
-        if (Desktop.isDesktopSupported()) {
-            new Thread(() -> {
-                try {
-                    Desktop.getDesktop().browse( new URI( "http://localhost:8080/snake-shopping-cart?shoppingcart_id=" + Globals.shoppingCartId ) );
-                } catch (IOException | URISyntaxException e1) {
-                    e1.printStackTrace();
-                }
-            }).start();
+        if (!Globals.bodyParts.empty()) {
+            if (Desktop.isDesktopSupported()) {
+                new Thread(() -> {
+                    try {
+                        Desktop.getDesktop().browse(new URI("http://localhost:8080/snake-shopping-cart?shoppingcart_id=" + Globals.shoppingCartId));
+                    } catch (IOException | URISyntaxException e1) {
+                        e1.printStackTrace();
+                    }
+                }).start();
+            }
         }
     }
 }

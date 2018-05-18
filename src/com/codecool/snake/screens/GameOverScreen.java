@@ -24,14 +24,6 @@ public class GameOverScreen extends Pane {
         VBox gameOverVBox = new VBox();
         gameOverVBox.setAlignment(Pos.CENTER);
 
-        // Game Over image
-        /*
-        ImageView gameOverImage = new ImageView();
-        gameOverImage.setImage(Globals.gameOver);
-        gameOverImage.setFitHeight(400);
-        gameOverImage.setPreserveRatio(true);
-        */
-
         // Game Over text
         DropShadow ds = new DropShadow();
         ds.setOffsetY(3.0);
@@ -46,9 +38,9 @@ public class GameOverScreen extends Pane {
         // Collected voters text
         int snakeBodyPartsNr = Utils.getSnakeBodyPartsNr();
 
-        Text collectedText = new Text("Collected voter(s): " + snakeBodyPartsNr);
+        Text collectedText = new Text("Collected quest item(s): " + snakeBodyPartsNr);
         collectedText.setFont(Font.font ("Verdana", 20));
-        collectedText.setFill(Color.YELLOW);
+        collectedText.setFill(Color.WHITE);
 
         String content = "\nPress 'R' for restart!";
         Text pressRText = new Text();
