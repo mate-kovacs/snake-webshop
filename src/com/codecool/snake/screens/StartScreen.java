@@ -19,13 +19,14 @@ public class StartScreen extends Pane {
     }
 
     public void initStartScreen() {
-        Text startTitle = new Text("Election Run\n");
-        startTitle.setFont(Font.font ("System", 100));
-        startTitle.setFill(Color.RED);
+        ImageView startTitle = new ImageView();
+        startTitle.setImage(Globals.gameTitle);
+        startTitle.setFitHeight(300);
+        startTitle.setPreserveRatio(true);
 
         ImageView gameStartImage = new ImageView();
         gameStartImage.setImage(Globals.gameStart);
-        gameStartImage.setFitHeight(250);
+        gameStartImage.setFitHeight(300);
         gameStartImage.setPreserveRatio(true);
 
         Text startGameText = new Text();

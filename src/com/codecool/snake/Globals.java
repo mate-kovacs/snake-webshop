@@ -27,7 +27,7 @@ public class Globals {
     public static Image powerupCoin = new Image("codecoin.png");
 
     public static Image gameStart = new Image("start_image.png");
-    public static Image gameOver = new Image("game_over.png");
+    public static Image gameTitle = new Image("title.png");
     public static Image bgImage = new Image("background.jpg");
 
     //.. put here the other images you want to use
